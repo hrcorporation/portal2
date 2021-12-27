@@ -6,8 +6,15 @@ namespace Composer\Autoload;
 
 class ComposerStaticInitb1b879bb8b6e9f5b796243e97b59d60e
 {
+    public static $files = array (
+        '0a80d26768cd24fcdbe75bdd719255c1' => __DIR__ . '/..' . '/firephp/firephp-core/lib/FirePHPCore/fb.php',
+    );
+
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'FB' => __DIR__ . '/..' . '/firephp/firephp-core/lib/FirePHPCore/fb.php',
+        'FirePHP' => __DIR__ . '/..' . '/firephp/firephp-core/lib/FirePHPCore/FirePHP.class.php',
+        'FirePHP_TestWrapper' => __DIR__ . '/..' . '/firephp/firephp-core/lib/FirePHPCore/FirePHP_TestWrapper.class.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
