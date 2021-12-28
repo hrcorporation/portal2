@@ -2,8 +2,6 @@
 require 'config.php';
 
 
-
-
 class conexionPDO{
 
     private $host = DB_HOST;

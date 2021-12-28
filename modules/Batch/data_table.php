@@ -13,8 +13,6 @@ $t29_batch = new t29_batch();
 
 $data = $t29_batch->select_batch();
 
-    
-
 
 //print json_encode($datos, JSON_FORCE_OBJECT);
 print json_encode($data, JSON_UNESCAPED_UNICODE);

@@ -1,6 +1,7 @@
 {
     "require": {
         "almasaeed2010/adminlte": "~3.0",
-        "firephp/firephp-core": "^0.5.3"
+        "firephp/firephp-core": "^0.5.3",
+        "datatables/datatables": "^1.10"
     }
 }

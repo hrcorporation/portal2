@@ -1,7 +1,14 @@
 <?php
-    define('DB_HOST','localhost');
-    define('DB_USUARIO','concr_adminconcretol');
-    define('DB_CONTRA','Nirvana1310');
-    define('DB_NOMBRE','concr_bdportalconcretol');
-    define('DB_CHARSET','utf8');
-    define('DB_PORT','3306');
+
+/**
+ * Se Define Los Datos de Conexion a la Base de datos MYSQL
+ */
+    define('DB_HOST','localhost'); // Direccion host del servidor
+    define('DB_USUARIO','root'); // Usuario de Conexion MYSQL
+    define('DB_CONTRA',''); // Contraseña del usuario de la Base de Datos.
+    define('DB_NOMBRE','concr_bdportalconcretol'); // Nombre de la Base de datos
+    define('DB_CHARSET','utf8'); // Formato de combinacion de Caracteres
+    define('DB_PORT','3306'); // Puerto de Conexion
+/**
+ * ===============================================================================================
+ */
