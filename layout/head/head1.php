@@ -4,7 +4,7 @@
 <head>
     <!-- Adaptabilidad y compatibilidad en los navegadores -->
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Titulo En la Pagina -->
     <title>CONCRE TOLIMA</title>
@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="../vendor/almasaeed2010/adminlte/dist/css/adminlte.min.css" />
     <link href="../custom/remi.css" rel="stylesheet" />
     <!--Iconos -->
-    <link rel="stylesheet" href="../plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="../vendor/almasaeed2010/adminlte/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Alertas -->
     <link href="../vendor/almasaeed2010/adminlte/plugins/sweetalert2/dist/sweetalert2.css" rel="stylesheet" />
