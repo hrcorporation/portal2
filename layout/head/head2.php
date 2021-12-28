@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 
@@ -18,20 +17,12 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="../../dist/css/adminlte.min.css" />
-  
-    <link href="../../custom/remi.css" rel="stylesheet" />
-    <link rel="stylesheet"  href="../../vendor/datatables/datatables/media/css/dataTables.bootstrap.min.css"/>
-    <link rel="stylesheet"  href="../../vendor/datatables/datatables/media/css/dataTables.bootstrap4.min.css"/>
-    <link rel="stylesheet"  href="../../vendor/datatables/datatables/media/css/dataTables.foundation.min.css"/>
-    <link rel="stylesheet"  href="../../vendor/datatables/datatables/media/css/dataTables.jqueryui.min.css"/>
-    <link rel="stylesheet"  href="../../vendor/datatables/datatables/media/css/dataTables.material.min.css"/>
-    <link rel="stylesheet"  href="../../vendor/datatables/datatables/media/css/dataTables.semanticui.min.css"/>
-    <link rel="stylesheet"  href="../../vendor/datatables/datatables/media/css/dataTables.uikit.min.css"/>
-    <link rel="stylesheet"  href="../../vendor/datatables/datatables/media/css/jquery.dataTables.min.css"/>
-    <link rel="stylesheet"  href="../../vendor/datatables/datatables/media/css/jquery.dataTables_themeroller.css"/>
-<link rel="stylesheet" href="../../node_modules/sweetalert2/dist/sweetalert2.min.css">
 
-    
+    <link href="../../custom/remi.css" rel="stylesheet" />
+   
+    <link rel="stylesheet" href="../../node_modules/sweetalert2/dist/sweetalert2.min.css">
+
+
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>
@@ -77,18 +68,16 @@
                 </li>
                 <li class="nav-item dropdown user-menu">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                        <img src="<?php __DIR__ ?>assets/images/usuarios/images.png" class="user-image img-circle elevation-2"
-                            alt="User Image">
+                        <img src="<?php __DIR__ ?>assets/images/usuarios/images.png" class="user-image img-circle elevation-2" alt="User Image">
                         <span class="d-none d-md-inline"><?php echo $nombre_usuario; ?></span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <!-- User image -->
                         <li class="user-header bg-primary">
-                            <img src="<?php __DIR__ ?>assets/images/usuarios/images.png" class="img-circle elevation-2"
-                                alt="User Image">
+                            <img src="<?php __DIR__ ?>assets/images/usuarios/images.png" class="img-circle elevation-2" alt="User Image">
 
                             <p>
-                            <?php echo $nombre_usuario; ?>
+                                <?php echo $nombre_usuario; ?>
 
                             </p>
                         </li>

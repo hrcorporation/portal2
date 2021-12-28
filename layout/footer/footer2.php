@@ -23,15 +23,7 @@
 <script src="../../plugins/select2/js/select2.js"></script>
 
 <script src="../../node_modules/sweetalert2/dist/sweetalert2.min.js"></script>
-<script src="../../node_modules/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="../../vendor/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
-<script src="../../vendor/datatables/datatables/media/js/dataTables.dataTables.min.js"></script>
-<script src="../../vendor/datatables/datatables/media/js/jquery.js"></script>
-<script src="../../vendor/datatables/datatables/media/js/dataTables.jqueryui.min.js"></script>
-<script src="../../vendor/datatables/datatables/media/js/dataTables.foundation.min.js"></script>
-<script src="../../vendor/datatables/datatables/media/js/dataTables.material.min.js"></script>
-<script src="../../vendor/datatables/datatables/media/js/dataTables.uikit.min.js"></script>
-<script src="../../vendor/datatables/datatables/media/js/dataTables.semanticui.min.js"></script>
+<script type="text/javascript" src="../../plugins/datatables/datatables.min.js"></script>
 
 <!-- bs-custom-file-input -->
 <script src="../../plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
