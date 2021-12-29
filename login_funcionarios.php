@@ -80,6 +80,7 @@ $datos = array(
     'estado' => $php_estado,
     'codigo' => $php_codigo,
     'errores' => $php_msg,
+    'post' => $_POST,
 );
 
 

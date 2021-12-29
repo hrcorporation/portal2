@@ -79,11 +79,6 @@
                     <br>
                     <!---    --->
                     <form id="Login" method="POST" name="Login">
-                        <!---  Animacion Cargando -->
-                        <div align="center" id="pageAnimation">
-                            <i class="fa fa-spinner fa-spin" style="font-size:24px">
-                            </i>
-                        </div>
                         <!--- /.Animacion cargando -->
                         <div class="input-group mb-3">
                             <input class="form-control" id="usuario" name="usuario" placeholder="Usuario" type="text">
