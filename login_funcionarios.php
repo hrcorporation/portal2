@@ -25,17 +25,21 @@ if (!empty($_POST['usuario']) && !empty($_POST['contrasenia'])) {
     $php_usuario = htmlspecialchars($_POST['usuario']);
     $php_password = htmlspecialchars(md5($_POST['contrasenia']));
     $hoy = date("d-m-Y H:i:s");
+    $php_msg = "paso 1";
 
     /**
      * Se Valida El Usuario y la Contraseña
      */
     if (is_array($user_array = $login->login_auth($php_usuario, $php_password))) {
         foreach ($user_array as $key) {
+            $php_msg = "paso 2";
 
             /**
              * Valida el Estado del Usuario
              */
             if (intval($key['estado']) == 1) {
+                $php_msg = "paso 3";
+
                 /**
                  * Se crea y se definen las variables de sesion
                  */
@@ -45,19 +49,19 @@ if (!empty($_POST['usuario']) && !empty($_POST['contrasenia'])) {
 
 
                 if (is_array($array_rol = $login::get_rol_tercero($con, intval($key['id'])))) {
+                    $php_msg = "paso 3";
+
                     foreach ($array_rol as $rol_user) {
                         switch (intval($rol_user)) {
                             case 25:
                                 $php_codigo = "modules/datos_remisiones/";
                                 $php_estado = true;
                                 break;
-
                             case ($rol_user > 0):
                             case ($rol_user < 90):
                                 $php_codigo = "menu/dashboard.php";
                                 $php_estado = true;
                                 break;
-
                             default:
                                 $php_codigo = "cerrar.php";
                                 $php_estado = false;
