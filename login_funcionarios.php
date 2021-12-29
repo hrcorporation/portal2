@@ -21,7 +21,7 @@ $PDO = new conexionPDO();
 $con = $PDO->connect();
 
 
-if (isset($_POST['usuario']) && !empty($_POST['usuario']) && isset($_POST['contrasenia']) && !empty($_POST['contrasenia'])) {
+if (!empty($_POST['usuario']) && !empty($_POST['contrasenia'])) {
     $php_usuario = htmlspecialchars($_POST['usuario']);
     $php_password = htmlspecialchars(md5($_POST['contrasenia']));
     $hoy = date("d-m-Y H:i:s");
@@ -56,7 +56,6 @@ if (isset($_POST['usuario']) && !empty($_POST['usuario']) && isset($_POST['contr
                             case ($rol_user < 90):
                                 $php_codigo = "menu/dashboard.php";
                                 $php_estado = true;
-
                                 break;
 
                             default:
@@ -74,6 +73,8 @@ if (isset($_POST['usuario']) && !empty($_POST['usuario']) && isset($_POST['contr
     } else {
         $php_msg = "Usuario y/o Constraseña Incorrecta";
     }
+} else {
+    $php_msg = "";
 }
 
 $datos = array(
