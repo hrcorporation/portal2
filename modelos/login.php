@@ -14,10 +14,10 @@ class login extends conexionPDO
     /**
      * Funcion para Obtener el Rol del Usuario
      */
-    public static function get_rol_tercero($con, $id_user)
+    public function get_rol_tercero($id_user)
     {
         $sql = "SELECT `id_rol` FROM `tercero_has_rol` WHERE `id_tercero` = :id_user";
-        $stmt = $con->prepare($sql); // Preparar la conexion
+        $stmt = $this->con->prepare($sql); // Preparar la conexion
         // Asignando Datos  SQL
         $stmt->bindParam(':id_user', $id_user, PDO::PARAM_STR);
 

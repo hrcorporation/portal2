@@ -17,8 +17,6 @@ $php_msg = "";
 $php_codigo = "#";
 
 
-$PDO = new conexionPDO();
-$con = $PDO->connect();
 
 
 if (!empty($_POST['usuario']) && !empty($_POST['contrasenia'])) {
@@ -48,7 +46,7 @@ if (!empty($_POST['usuario']) && !empty($_POST['contrasenia'])) {
                 $_SESSION['session_key'] = base64_encode($hoy);
 
 
-                if (is_array($array_rol = $login::get_rol_tercero($con, intval($key['id'])))) {
+                if (is_array($array_rol = $login->get_rol_tercero(intval($key['id'])))) {
                     $php_msg = "paso 4";
 
                     foreach ($array_rol as $rol_user) {
