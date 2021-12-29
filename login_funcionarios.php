@@ -9,7 +9,6 @@ $login = new login();
 
 
 $t1_terceros = new t1_terceros();
-$t11_usuarios = new t11_usuarios();
 $php_clases = new php_clases();
 
 $php_estado = false;
@@ -46,7 +45,7 @@ if (!empty($_POST['usuario']) && !empty($_POST['contrasenia'])) {
                 $_SESSION['session_key'] = base64_encode($hoy);
 
 
-                if (is_array($array_rol = $login->get_rol_tercero(intval($key['id'])))) {
+                if (is_array($array_rol = $login->get_rol_tercero($key['id']))) {
                     $php_msg = "paso 4";
 
                     foreach ($array_rol as $rol_user) {
