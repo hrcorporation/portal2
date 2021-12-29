@@ -8,10 +8,6 @@ switch ($rol_user) {
     case 20:
     case 22:
     case 29:
-
-
-        //case 26:
-
 ?>
         <div class="col-4" id="">
             <div class="small-box bg-info ">

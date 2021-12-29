@@ -13,15 +13,19 @@ if (
     isset($_SESSION['session_key'])         && !empty($_SESSION['session_key']) &&
     isset($_SESSION['id_usuario'])          && !empty($_SESSION['id_usuario'])
 ) {
-
-    
     /**
-     * Cargar Los Autoload de los Modulos
+     * Validacion de Tipo de Tercero
      */
-    require '../librerias/autoload.php';
-    include '../modelos/autoload.php';
-    include '../vendor/autoload.php';
-
+    if (true) {
+        /**
+         * Cargar Los Autoload de los Modulos
+         */
+        require '../librerias/autoload.php';
+        include '../modelos/autoload.php';
+        include '../vendor/autoload.php';
+    } else {
+        header('location: ../cerrar.php');
+    }
     /**
      * ====================================================
      * Inicializar Clases

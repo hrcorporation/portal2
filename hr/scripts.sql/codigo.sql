@@ -3,8 +3,12 @@
     Falta
 **/
 
+CREATE TABLE `concr_bdportalconcretol`.`tercero_as_tipo` ( `id` INT(11) NOT NULL AUTO_INCREMENT ,  `id_tercero` INT(11) NOT NULL ,  `id_obra` INT(11) NOT NULL ,    PRIMARY KEY  (`id`),    INDEX  (`id_tercero`),    INDEX  (`id_obra`)) ENGINE = InnoDB;
+
+CREATE TABLE `concr_bdportalconcretol`.`tercero_has_rol` ( `id` INT(11) NOT NULL AUTO_INCREMENT ,  `id_tercero` INT(11) NOT NULL ,  `id_rol` INT(11) NOT NULL ,    PRIMARY KEY  (`id`),    INDEX  (`id_tercero`),    INDEX  (`id_rol`)) ENGINE = InnoDB;
 
 
+CREATE TABLE `concr_bdportalconcretol`.`tercero_has_obra` ( `id` INT(11) NOT NULL AUTO_INCREMENT ,  `id_tercero` INT(11) NULL DEFAULT NULL ,  `id_cliente` INT(11) NULL DEFAULT NULL ,  `id_obra` INT(11) NULL DEFAULT NULL ,    PRIMARY KEY  (`id`)) ENGINE = InnoDB;
 /**
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 **/

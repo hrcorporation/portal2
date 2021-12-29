@@ -15,9 +15,6 @@ if(isset($_SESSION['tipo'])         && !empty($_SESSION['tipo']) &&
     }else {
         $rs = false;
     }
-
-
-
 if($rs)
 {
     require '../../../librerias/autoload.php';
