@@ -49,18 +49,22 @@ if (!empty($_POST['usuario']) && !empty($_POST['contrasenia'])) {
 
 
                 if (is_array($array_rol = $login::get_rol_tercero($con, intval($key['id'])))) {
-                    $php_msg = "paso 3";
+                    $php_msg = "paso 4";
 
                     foreach ($array_rol as $rol_user) {
                         switch (intval($rol_user)) {
                             case 25:
                                 $php_codigo = "modules/datos_remisiones/";
                                 $php_estado = true;
+                                $php_msg = "Logeado Correctamente";
+
                                 break;
                             case ($rol_user > 0):
                             case ($rol_user < 90):
                                 $php_codigo = "menu/dashboard.php";
                                 $php_estado = true;
+                                $php_msg = "Logeado Correctamente";
+
                                 break;
                             default:
                                 $php_codigo = "cerrar.php";
