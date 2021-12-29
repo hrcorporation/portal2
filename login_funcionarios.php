@@ -74,7 +74,7 @@ if (!empty($_POST['usuario']) && !empty($_POST['contrasenia'])) {
         $php_msg = "Usuario y/o Constraseña Incorrecta";
     }
 } else {
-    $php_msg = "";
+    $php_msg = "faltan llenar Campos Requeridos";
 }
 
 $datos = array(
