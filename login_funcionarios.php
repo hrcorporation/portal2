@@ -40,9 +40,9 @@ if (!empty($_POST['usuario']) && !empty($_POST['contrasenia'])) {
                 /**
                  * Se crea y se definen las variables de sesion
                  */
-                $_SESSION['id_usuario'] = $php_clases->HR_Crypt($key['id'], 1);
+                $_SESSION['id_usuario'] = $key['id'];
                 $_SESSION['nombre_usuario'] = $key['nombre_completo'];
-                $_SESSION['session_key'] = base64_encode($hoy);
+                $_SESSION['session_key'] = $hoy;
 
 
                 if (is_array($array_rol = $login->get_rol_tercero($key['id']))) {
