@@ -17,9 +17,6 @@ $php_msg = "";
 $php_codigo = "#";
 
 
-$_POST['usuario'] = 1110582312;
-$_POST['contrasenia'] = 1110582312;
-
 $PDO = new conexionPDO();
 $con = $PDO->connect();
 
