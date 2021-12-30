@@ -10,6 +10,31 @@ class login extends conexionPDO
         date_default_timezone_set('America/Bogota');
     }
 
+    /**
+     * Funcion pára buscar un array dentro de otro array
+     *
+     */
+
+    public static function validar_rol_user(array $array_permisos, array $array_rol)
+    {
+        if(is_array($array_permisos))
+        {   
+            if(is_array($array_rol))
+            {
+                foreach ($array_rol as $key) {
+                    if(in_array(intval($key),$array_permisos)){
+                        return true;
+                    }
+                }
+                return false;
+
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+    }
 
     /**
      * Funcion para Obtener el Rol del Usuario

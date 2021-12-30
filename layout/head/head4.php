@@ -11,14 +11,14 @@
     <!-- Icono de la pagina web -->
     <link href="../../../assets/images/logos/LogoConcretol.png" rel="icon" type="image">
     <!-- Tema Adminlte -->
-    <link rel="stylesheet" href="../../../vendor/almasaeed2010/adminlte/dist/css/adminlte.min.css" />
+    <link rel="stylesheet" href="../../../../vendor/almasaeed2010/adminlte/dist/css/adminlte.min.css" />
     <link href="../custom/remi.css" rel="stylesheet" />
     <!--Iconos -->
     <link rel="stylesheet" href="../../../../vendor/almasaeed2010/adminlte/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Alertas -->
-    <link href="../../../../vendor/almasaeed2010/adminlte/plugins/sweetalert2/dist/sweetalert2.css" rel="stylesheet" />
-    <link href="../../../../vendor/almasaeed2010/adminlte/plugins/toastr/toastr.css" rel="stylesheet" />
+    <link href="../../../../node_modules/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet" />
+    <link href="../../../../node_modules/toastr/build/toastr.min.css" rel="stylesheet" />
     <!-- Fuentes de Letra -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

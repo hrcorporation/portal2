@@ -1,32 +1,77 @@
 <?php
-/////////////////////////////////////////////////////////////////////
-switch ($rol_user) {
-    case 1:
-    case 7:
-    case 8:
-    case 14:
-    case 20:
-    case 22:
-    case 29:
+/**
+ * Habilitar enlaces para los modulos de la remiweb; 
+ */
+if (is_array($array_rol_user =  $login->get_rol_tercero($_SESSION['id_usuario']))) :
 ?>
+    <!--- ============================MODULO BATCHES============================================= -->
+    <?php
+    $modulos = array(1, 7, 8, 14, 20, 22, 29); // Array de roles para habilitar roles
+    if ($login->validar_rol_user($modulos, $array_rol_user)) : // Validacion para habilitar el usuario
+    ?>
+        <!-- Modulo HTMl -->
         <div class="col-4" id="">
             <div class="small-box bg-info ">
                 <div class="inner">
+                    <!-- Nombre de Modulo -->
                     <h3>Batches</H3>
                 </div>
                 <div class="icon">
+                    <!-- icono del Modulo -->
                     <i class="fas fa-wallet"></i>
                 </div>
+                <!-- Enlace de redireccionamiento del Modulo  -->
                 <a class="small-box-footer disabled" href="Batch/">
                     Ir <i class="fas fa-arrow-circle-right"></i>
                 </a>
             </div>
         </div>
+    <?php
+    endif; // Fin de la Validacion habilitar modulo
+    ?>
+    <!--- ============================ FIN MODULO BATCHES============================================= -->
+    <!--- ============================MODULO EMPLEADOS============================================= -->
+    <?php
+    $modulos = array(1, 7, 8, 14, 20, 22, 29); // Array de roles para habilitar roles
+    if ($login->validar_rol_user($modulos, $array_rol_user)) : // Validacion para habilitar el usuario
+    ?>
+        <!-- Modulo HTMl -->
+        <div class="col-4" id="">
+            <div class="small-box bg-info ">
+                <div class="ribbon-wrapper ribbon-lg">
+                    <div class="ribbon bg-warning">
+                        proximamente
+                    </div>
+                </div>
+                <div class="inner">
+                    <!-- Nombre de Modulo -->
+                    <h3>COMERCIAL</H3>
+                </div>
+                <div class="icon">
+                    <!-- icono del Modulo -->
+                    <i class="fas fa-wallet"></i>
+                </div>
+                <!-- Enlace de redireccionamiento del Modulo  -->
+                <a class="small-box-footer disabled" href="comercial/">
+                    Ir <i class="fas fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </div>
+    <?php
+    endif; // Fin de la Validacion habilitar modulo
+    ?>
+    <!--- ============================ FIN MODULO BATCHES============================================= -->
+
+
+
 <?php
-        break;
-}
-/////////////////////////////////////////////////////////////////////
+
+endif; // Fin de la Validacion traer rol del array
 ?>
+
+
+
+
 <?php
 /////////////////////////////////////////////////////////////////////
 switch ($rol_user) {
@@ -70,7 +115,7 @@ switch ($rol_user) {
     case 13:
     case 14:
     case 20:
-    
+
 ?>
         <div class="col-4" id="">
             <div class="small-box bg-info">

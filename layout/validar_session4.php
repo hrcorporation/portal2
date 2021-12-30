@@ -31,6 +31,8 @@ if (
      * Inicializar Clases
      */
     $php_clases = new php_clases();
+    $login = new login();
+
     /**
      * FirePHP Sirve para salida del mensaje en la consola del navegador log.
      *$firephp->fb('Hello World');

@@ -19,8 +19,9 @@
 <!-- Select2 -->
 <script src="../vendor/almasaeed2010/adminlte/plugins/select2/js/select2.js"></script>
 <!-- Alertas -->
-<script src="../vendor/almasaeed2010/adminlte/plugins/sweetalert2/dist/sweetalert2.js"></script>
-<script src="../vendor/almasaeed2010/adminlte/plugins/toastr/toastr.js"></script>
+<script src="../node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
+<script src="../node_modules/sweetalert2/dist/sweetalert2.js"></script>
+<script src="../node_modules/toastr/build/toastr.min.js"></script>
 <!-- Datatables -->
 <script type="text/javascript" src="../vendor/almasaeed2010/adminlte/plugins/datatables/datatables.min.js"></script>
 <!-- Adicionales para Formulario -->

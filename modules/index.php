@@ -3,9 +3,7 @@
 <?php include '../layout/head/head1.php'; ?>
 <?php include 'sidebar.php' ?>
 
-<?php require '../librerias/autoload.php';
-require '../modelos/autoload.php';
-require '../vendor/autoload.php'; ?>
+
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -43,7 +41,11 @@ require '../vendor/autoload.php'; ?>
             </div>
             <div class="card-body">
                 <div class="row">
-                    <?php include 'modulos.php' ?>
+                    <?php 
+                    
+                     
+
+                    include 'modulos.php' ?>
                 </div>
 
             </div>

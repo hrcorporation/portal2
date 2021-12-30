@@ -4,7 +4,7 @@
  * Inicio de sesion
  */
 session_start();
-//ob_start();
+ob_start();
 
 /**
  * Condicional para Validar Sesion
@@ -31,6 +31,8 @@ if (
      * Inicializar Clases
      */
     $php_clases = new php_clases();
+    $login = new login();
+
     /**
      * FirePHP Sirve para salida del mensaje en la consola del navegador log.
      *$firephp->fb('Hello World');
