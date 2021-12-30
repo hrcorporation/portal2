@@ -22,14 +22,14 @@ if (!empty($_POST['usuario']) && !empty($_POST['contrasenia'])) {
     $php_usuario = htmlspecialchars($_POST['usuario']);
     $php_password = htmlspecialchars(md5($_POST['contrasenia']));
     $hoy = date("d-m-Y H:i:s");
-    $php_msg = "paso 1";
+  
 
     /**
      * Se Valida El Usuario y la Contraseña
      */
     if (is_array($user_array = $login->login_auth($php_usuario, $php_password))) {
         foreach ($user_array as $key) {
-            $php_msg = "paso 2";
+           
 
             /**
              * Valida el Estado del Usuario
@@ -87,6 +87,8 @@ $datos = array(
     'codigo' => $php_codigo,
     'errores' => $php_msg,
     'post' => $_POST,
+    'key' => $key,
+
 );
 
 

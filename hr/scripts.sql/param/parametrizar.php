@@ -27,7 +27,7 @@ class parametrizar extends conexionPDO
             $arraytablas = array('tercero_as_tipo', 'tercero_has_rol', 'tercero_has_obra');
 
             if (true) {
-                SELF::eliminar_registos_tablas($this->con, $arraytablas);
+                //SELF::eliminar_registos_tablas($this->con, $arraytablas);
             }
 
 

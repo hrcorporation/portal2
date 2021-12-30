@@ -85,7 +85,7 @@ class login extends conexionPDO
         $user_table = array('ct1_NumeroIdentificacion', 'ct1_usuario', 'ct1_CorreoElectronico');
 
         foreach ($user_table as $key) {
-            $sql = "SELECT `ct1_IdTerceros`,ct1_Estado,`ct1_RazonSocial` FROM `ct1_terceros` WHERE " . $key . " = :user AND `ct1_pass` = :pass";
+            $sql = "SELECT `ct1_IdTerceros`,ct1_Estado,`ct1_RazonSocial` FROM `ct1_terceros` WHERE " . $key . " = :user AND `ct1_pass` = :pass LIMIT 1";
             $stmt = $con->prepare($sql); // Preparar la conexion
             // Asignando Datos  SQL
             $stmt->bindParam(':user', $user, PDO::PARAM_STR);
@@ -93,7 +93,7 @@ class login extends conexionPDO
 
             if ($result = $stmt->execute()) { // Ejecutar
                 $num_reg =  $stmt->rowCount(); // Get Numero de Registros
-                if ($num_reg == 1) { // Validar el numero de Registros
+                if ($num_reg > 0) { // Validar el numero de Registros
                     while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) { // Obtener los datos de los valores
                         $datos['id'] = $fila['ct1_IdTerceros'];
                         $datos['nombre_completo'] = $fila['ct1_RazonSocial'];
