@@ -34,7 +34,7 @@
                             </a>
                         </li>
                         <li class="nav-item has-treeview">
-                            <a href="create/asignar_conductor.php" class="nav-link ">
+                            <a href="create/crear.php" class="nav-link ">
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
                                     Crear
