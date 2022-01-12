@@ -2,9 +2,7 @@
 $(document).ready(function (e) {
 
     $("#btn-restablecer").click(function () {
-        // var id = $("#id").val();
-
-
+        var id = $("#id").val();
         Swal.fire({
             title: 'Esta Seguro(a) de restablecer la contraseña?',
             text: "",
@@ -16,15 +14,14 @@ $(document).ready(function (e) {
             confirmButtonText: 'Si Restablecer'
         }).then((result) => {
             if (result.value) {
-
+                console.log("restableciendo");
 
                 $.ajax({
                     url: "ajax_restablecer_pass.php",
                     type: "POST",
                     data:
                             {
-                                id: id,
-
+                                id: $("#id").val(),
                             },
                     success: function (response)
                     {
@@ -38,7 +35,6 @@ $(document).ready(function (e) {
                                     )
                         } else {
                             console.log("error");
-
                         }
 
                     },
@@ -47,16 +43,8 @@ $(document).ready(function (e) {
                     },
 
                 });
-
-
-
-
-
-
             }
         })
-
-
     });
 
 

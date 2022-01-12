@@ -116,7 +116,7 @@ while($fila_t1 = $datos_tercero->fetch(PDO::FETCH_ASSOC)){
             </div>
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title"> Usuario Cliente</h3>
+                    <h3 class="card-title"> Acicionar de Obras </h3>
 
                     <div class="card-tools">
                         <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
@@ -149,6 +149,41 @@ while($fila_t1 = $datos_tercero->fetch(PDO::FETCH_ASSOC)){
 
                         </div>
                     </div>
+                    <div class="row">
+
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title"> Acicionar de Obras </h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
+                            title="Collapse">
+                            <i class="fas fa-minus"></i></button>
+                        <button type="button" class="btn btn-tool" data-card-widget="maximize"><i
+                                class="fas fa-expand"></i></button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    
+                    <div class="row">
+                        <div class="col">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Cliente</th>
+                                        <th>Obra</th>
+                                        <th>Detalle</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -172,6 +207,55 @@ $(document).ready(function() {
 
 <script>
 $(document).ready(function() {
+
+    //  AJAX RESTABLECER CONTRASENA
+    $("#btn-restablecer").click(function () {
+        var id = $("#id").val();
+        Swal.fire({
+            title: 'Esta Seguro(a) de restablecer la contraseña?',
+            text: "",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'No',
+            confirmButtonText: 'Si Restablecer'
+        }).then((result) => {
+            if (result.value) {
+                console.log("restableciendo");
+
+                $.ajax({
+                    url: "ajax_restablecer_pass.php",
+                    type: "POST",
+                    data:
+                            {
+                                id: $("#id").val(),
+                            },
+                    success: function (response)
+                    {
+
+                        if (response.estado) {
+
+                            Swal.fire(
+                                    'La contraseña Fue Restablecida Correctamente',
+                                    'usuario y contraseña del cliente es mismo numero de identificacion',
+                                    'success'
+                                    )
+                        } else {
+                            console.log("error");
+                        }
+
+                    },
+                    error: function (respuesta) {
+                        alert(JSON.stringify(respuesta));
+                    },
+
+                });
+            }
+        })
+    });
+
+    
 
     $('#C_IdTerceros').on('change', function() {
         $.ajax({

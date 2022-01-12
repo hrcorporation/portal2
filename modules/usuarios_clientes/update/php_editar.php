@@ -24,15 +24,13 @@ if(isset($_POST['C_NumeroID'])&&isset($_POST['C_nombres']) &&isset($_POST['C_Ape
     $C_nombres = htmlspecialchars($_POST['C_nombres']);
     $C_Apellidos = htmlspecialchars($_POST['C_Apellidos']);
     $C_Usuario = $C_NumeroID;
-    $id_cliente1 = htmlspecialchars($_POST['C_IdTerceros']);
-    $id_obra = htmlspecialchars($_POST['C_Obras']);
     $C_Pass = md5($C_NumeroID);
     $razonSocial = $C_nombres ." ".$C_Apellidos;
     $estado = 1;
     $rol = 102;
     $TipoTercero = 3;
     
-    $result = $t1_terceros->editar_user_cliente($C_NumeroID, $C_nombres, $C_Apellidos, $id_cliente1,$id_obra, $id);
+    $result = $t1_terceros->editar_user_cliente($C_NumeroID, $C_nombres, $C_Apellidos, $id);
     
     
     if($result){
@@ -51,6 +49,7 @@ $datos = array(
     'estado' => $php_estado,
     'errores' => $php_error,
     'result' => $resultado,
+    'post'=>$_POST
 );
 
 
