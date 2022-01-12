@@ -9,10 +9,6 @@ require '../../../librerias/autoload.php';
 require '../../../modelos/autoload.php';
 require '../../../vendor/autoload.php'; 
 
-
-
-
-
 $php_clases = new php_clases();
 //$get_datos = new get_datos();
 $t5_obras = new t5_obras();

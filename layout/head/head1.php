@@ -27,6 +27,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>
     <!-- Adicionales para Formulario -->
     <link rel="stylesheet" href="../vendor/almasaeed2010/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="../bower_components/select2/dist/css/select2.min.css">
     <!-- Datatables -->
     <link rel="stylesheet" type="text/css" href="../vendor/almasaeed2010/adminlte/plugins/datatables/datatables.min.css" />
 </head>

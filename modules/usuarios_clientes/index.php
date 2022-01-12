@@ -149,7 +149,6 @@ require '../../vendor/autoload.php'; ?>
         else :
             header('location : ../../cerrar.php');
         endif;
-
         ?>
 
 

@@ -25,6 +25,8 @@
 <!-- Datatables -->
 <script type="text/javascript" src="../vendor/almasaeed2010/adminlte/plugins/datatables/datatables.min.js"></script>
 <!-- Adicionales para Formulario -->
+<script src="../bower_components/select2/dist/js/select2.full.min.js"></script>
+<script src="../bower_components/select2/dist/js/select2.min.js"></script>
 <script src="../vendor/almasaeed2010/adminlte/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 <script src="../vendor/almasaeed2010/adminlte/plugins/jquery-validation/additional-methods.min.js"></script>
 

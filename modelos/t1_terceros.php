@@ -319,8 +319,7 @@ class t1_terceros extends conexionPDO
         $stmt->bindParam(':rol', $this->rol, PDO::PARAM_STR);
 
         if ($stmt->execute()) {
-
-            return true;
+            return intval($this->con->lastInsertId());
         } else {
             return false;
         }
