@@ -170,7 +170,7 @@ while($fila_t1 = $datos_tercero->fetch(PDO::FETCH_ASSOC)){
                     
                     <div class="row">
                         <div class="col">
-                            <table>
+                            <table id="t_cli_ob" class="display" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>Id</th>
@@ -199,6 +199,48 @@ while($fila_t1 = $datos_tercero->fetch(PDO::FETCH_ASSOC)){
 <script>
 $(document).ready(function() {
     $('.select2').select2();
+
+    //tabla Cliente y obra
+    var table = $('#t_cli_ob').DataTable({
+        //"processing": true,
+        "scrollX": true,
+        "ajax": {
+            "url": "datatable_cli_ob.php",
+            "dataSrc": ""
+        },
+        "order": [
+            [0, 'desc']
+        ],
+        "columns": [{
+                "data": "id"
+            },
+            {
+                "data": "id_tercero"
+            },
+            {
+                "data": "id_cliente"
+            },
+            {
+                "data": "id_obra"
+            },
+            {
+                "data": null,
+                "defaultContent": "<button class='btn btn-warning btn-sm'> <i class='fas fa-eye'></i> </button>"
+            }
+        ],
+        //"scrollX": true,
+
+    });
+
+
+    table.on('order.dt search.dt', function() {
+        table.column(0, {
+            search: 'applied',
+            order: 'applied'
+        }).nodes().each(function(cell, i) {
+            cell.innerHTML = i + 1;
+        });
+    }).draw();
 
 });
 </script>
@@ -255,6 +297,47 @@ $(document).ready(function() {
         })
     });
 
+    // Ajax Eliminar Usuario
+    $("#btn-eliminar").click(function () {
+        var id = $("#id").val();
+        Swal.fire({
+            title: 'Esta Seguro(a) de Eliminar este Usuario?',
+            text: "",
+            icon: 'danger',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            cancelButtonText: 'No',
+            confirmButtonText: 'Si Eliminar'
+        }).then((result) => {
+            if (result.value) {
+                // ajax para eliminar el usuario
+                $.ajax({
+                    url: "ajax_eliminar.php",
+                    type: "POST",
+                    data:
+                            {
+                                id: $("#id").val(),
+                            },
+                    success: function (response)
+                    {
+                        if (response.estado) {
+
+                            Swal.fire(
+                                    'El usuario fue eliminado correctamente',
+                                    'success'
+                                    )
+                        } else {
+                            console.log("error");
+                        }
+                    },
+                    error: function (respuesta) {
+                        alert(JSON.stringify(respuesta));
+                    },
+                });
+            }
+        });
+    });
     
 
     $('#C_IdTerceros').on('change', function() {
@@ -277,8 +360,7 @@ $(document).ready(function() {
 })
 </script>
 <script src="ajax_editar.js"> </script>
-<script src="ajax_restablecer_pass.js"> </script>
-<script src="ajax_eliminar.js"> </script>
+
 </body>
 
 </html>

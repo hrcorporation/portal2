@@ -23,7 +23,13 @@
 <script src="../node_modules/sweetalert2/dist/sweetalert2.js"></script>
 <script src="../node_modules/toastr/build/toastr.min.js"></script>
 <!-- Datatables -->
-<script type="text/javascript" src="../vendor/almasaeed2010/adminlte/plugins/datatables/datatables.min.js"></script>
+<script src="../vendor/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
+<script src="../vendor/datatables/datatables/media/js/dataTables.bootstrap.min.js"></script>
+<script src="../vendor/datatables/datatables/media/js/dataTables.dataTables.min.js"></script>
+<script src="../vendor/datatables/datatables/media/js/dataTables.jqueryui.min.js"></script>
+<script src="../vendor/datatables/datatables/media/js/dataTables.material.min.js"></script>
+<script src="../vendor/datatables/datatables/media/js/dataTables.uikit.min.js"></script>
+
 <!-- Adicionales para Formulario -->
 <script src="../bower_components/select2/dist/js/select2.full.min.js"></script>
 <script src="../bower_components/select2/dist/js/select2.min.js"></script>
