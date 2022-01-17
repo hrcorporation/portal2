@@ -16,7 +16,7 @@
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                         <li class="nav-item ">
-                            <a href="../index.php" class="nav-link ">
+                            <a href="../../../index.php" class="nav-link ">
                                 <i class="nav-icon fas fa-tachometer-alt"></i>
                                 <p>
                                     Modulos
@@ -26,7 +26,7 @@
                         <li class="nav-header">Comercial</li>
 
                         <li class="nav-item has-treeview">
-                            <a href="../index.php" class="nav-link">
+                            <a href="../../index.php" class="nav-link active">
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
                                     Explorar
@@ -35,7 +35,7 @@
                         </li>
                         <li class="nav-header">Oportunidad de Negocio</li>
                         <li class="nav-item has-treeview">
-                            <a href="" class="nav-link active">
+                            <a href="" class="nav-link">
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
                                     Explorar
@@ -43,7 +43,7 @@
                             </a>
                         </li>
                         <li class="nav-item has-treeview">
-                            <a href="create/crear.php" class="nav-link">
+                            <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
                                     Crear
@@ -51,7 +51,7 @@
                             </a>
                         </li>
 
-                       
+                        
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

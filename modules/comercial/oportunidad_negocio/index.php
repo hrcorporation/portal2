@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>COMERCIAL</h1>
+                    <h1>OPORTUNIDAD DE NEGOCIO</h1>
                 </div>
                 <div class="col-sm-6">
                     <!--
@@ -49,37 +49,25 @@
                         </div>
                     </div>
                     <div class="card-body">
-
-                        <div id="contenido">
-
-                            <table id="table_op">
+                            <table id="table_op" class="display" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th>id</th>
+                                        <th>N</th>
+                                        <th>status</th>
                                         <th>Fecha</th>
                                         <th>identificacion</th>
-                                        <th>cliente</th>
-                                        <th>resultado</th>
-                                        <th>observacion</th>
-                                        <th>status</th>
-                                        <th></th>
+                                        <th>Nombre cliente</th>
+                                        <th>Detalle</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
                                 </tbody>
                             </table>
-
-
-                        </div>
                     </div>
                     <!-- /.card-body -->
-                    <div class="card-footer">
-                    </div>
-                    <!-- /.card-footer-->
                 </div>
                 <!-- /.card -->
-
             <?php
             else :
             ?>
@@ -108,7 +96,7 @@
             //"processing": true,
             //"scrollX": true,
             "ajax": {
-                "url": "data_table.php",
+                "url": "datatable.php",
                 "dataSrc": ""
             },
             "order": [
@@ -118,25 +106,17 @@
                     "data": "id"
                 },
                 {
+                    "data": "status_op"
+                },
+                {
                     "data": "fecha"
                 },
                 {
                     "data": "nidentificacion"
                 },
                 {
-                    "data": "nombrescompletos"
-                },
-                
-                {
-                    "data": "resultado"
+                    "data": "razon_social"
                 }, 
-                {
-                    "data": "observacion"
-                }, 
-                {
-                    "data": "status_op"
-                },
-
                 {
                     "data": null,
                     "defaultContent": "<button class='btn btn-warning btn-sm'> <i class='fas fa-eye'></i> </button>"
@@ -146,7 +126,6 @@
 
         });
 
-
         table.on('order.dt search.dt', function() {
             table.column(0, {
                 search: 'applied',
@@ -155,19 +134,14 @@
                 cell.innerHTML = i + 1;
             });
         }).draw();
-
         $('#table_op tbody').on('click', 'button', function() {
             var data = table.row($(this).parents('tr')).data();
             var id = data['id'];
             window.location = "verbatch/index.php?id=" + id;
         });
-
         setInterval(function() {
             table.ajax.reload(null, false);
         }, 10000);
-
-
-
     });
 </script>
 

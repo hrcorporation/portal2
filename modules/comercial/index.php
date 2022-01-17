@@ -38,37 +38,85 @@
                  * Card Body
                  */
         ?>
-                <!-- Default box -->
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Tabla de Clientes</h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
-                                <i class="fas fa-minus"></i></button>
-                            <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
-                        </div>
-                    </div>
-                    <div class="card-body">
-
-                        <div id="contenido">
-
-
-                           
-                        </div>
-                    </div>
-                    <!-- /.card-body -->
-                    <div class="card-footer">
-                    </div>
-                    <!-- /.card-footer-->
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Tabla de Clientes</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
+                        title="Collapse">
+                        <i class="fas fa-minus"></i></button>
+                    <button type="button" class="btn btn-tool" data-card-widget="maximize"><i
+                            class="fas fa-expand"></i></button>
                 </div>
-                <!-- /.card -->
+            </div>
+            <div class="card-body">
 
-            <?php
+                <div id="contenido">
+
+                    <div class="row">
+                        <!-- Modulo HTMl -->
+                        <div class="col-4" id="">
+                            <div class="small-box bg-info ">
+                                <div class="ribbon-wrapper ribbon-lg">
+                                    <div class="ribbon bg-warning">
+                                        proximamente
+                                    </div>
+                                </div>
+                                <div class="inner">
+                                    <!-- Nombre de Modulo -->
+                                    <h3>OPORTUNIDAD DE</h3>
+                                    <h3> NEGOCIO</H3>
+                                </div>
+                                <div class="icon">
+                                    <!-- icono del Modulo -->
+                                    <i class="fas fa-wallet"></i>
+                                </div>
+                                <!-- Enlace de redireccionamiento del Modulo  -->
+                                <a class="small-box-footer disabled" href="oportunidad_negocio/">
+                                    Ir <i class="fas fa-arrow-circle-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Modulo HTMl -->
+                        <div class="col-4" id="">
+                            <div class="small-box bg-info ">
+                                <div class="ribbon-wrapper ribbon-lg">
+                                    <div class="ribbon bg-warning">
+                                        proximamente
+                                    </div>
+                                </div>
+                                <div class="inner">
+                                    <!-- Nombre de Modulo -->
+                                    <h3>CLIENTES</H3>
+                                </div>
+                                <div class="icon">
+                                    <!-- icono del Modulo -->
+                                    <i class="fas fa-wallet"></i>
+                                </div>
+                                <!-- Enlace de redireccionamiento del Modulo  -->
+                                <a class="small-box-footer disabled" href="clientes/">
+                                    Ir <i class="fas fa-arrow-circle-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+            </div>
+            <!-- /.card-footer-->
+        </div>
+        <!-- /.card -->
+
+        <?php
             else :
             ?>
-                <div class="callout callout-warning">
-                    <h5>No posee permisos en este modulo</h5>
-                </div>
+        <div class="callout callout-warning">
+            <h5>No posee permisos en este modulo</h5>
+        </div>
         <?php
             endif;
         else :

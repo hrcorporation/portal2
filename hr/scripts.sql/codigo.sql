@@ -9,6 +9,7 @@ ALTER TABLE `tercero_has_rol`  ADD `id_cliente` INT(11) NULL DEFAULT NULL  AFTER
 CREATE TABLE `concr_bdportalconcretol`.`ct63_oportuniodad_negocio` ( `id` INT(11) NOT NULL AUTO_INCREMENT ,  `fecha` DATE NULL DEFAULT NULL ,  `nidentificacion` VARCHAR(80) NULL DEFAULT NULL ,  `nombrescompletos` VARCHAR(80) NULL DEFAULT NULL ,  `apellidoscompletos` VARCHAR(80) NULL DEFAULT NULL ,  `resultado` VARCHAR(255) NULL DEFAULT NULL ,  `observacion` VARCHAR(255) NULL DEFAULT NULL ,  `status_op` INT(11) NULL DEFAULT NULL ,    PRIMARY KEY  (`id`)) ENGINE = InnoDB;
 
 
+CREATE TABLE `concr_bdportalconcretol`.`cliente_op` ( `id` INT(11) NOT NULL AUTO_INCREMENT ,  `tipo_identificacion` INT(11) NULL DEFAULT NULL ,  `numero_documento` INT(20) NULL DEFAULT NULL ,  `nombre_completo` VARCHAR(100) NULL DEFAULT NULL ,    PRIMARY KEY  (`id`)) ENGINE = InnoDB;
 
 /**
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -231,8 +231,7 @@ $(document).ready(function() {
         //"scrollX": true,
 
     });
-
-
+    
     table.on('order.dt search.dt', function() {
         table.column(0, {
             search: 'applied',

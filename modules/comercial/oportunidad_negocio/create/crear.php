@@ -9,7 +9,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>CLIENTE</h1>
+                    <h1>CREAR OPORTUNIDAD DE NEGOCIO</h1>
                 </div>
                 <div class="col-sm-6">
                     <!--
@@ -42,7 +42,7 @@
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Listado Oportunidades de Negocio</h3>
+                <h3 class="card-title">CREAR OPORTUNIDAD DE NEGOCIO</h3>
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
                         title="Collapse">
@@ -52,42 +52,52 @@
                 </div>
             </div>
             <div class="card-body">
+                <div class="progress">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 0.5%" aria-valuenow="25"
+                        aria-valuemin="0" aria-valuemax="100"> <span class=" text_progresbar">0% </span> </div>
+                </div>
                 <div id="contenido">
-                    <form name="" id="" method="post">
+                    <form name="form_crear_op" id="form_crear_op" method="post">
                         <div class="row">
-                            <div class="col">
-                                <label>Tipo de Documento</label>
-                                <select name="tipo_doc" id="tipo_doc">
-                                    <option value="CC">Cedula de ciudadania</option>
-                                    <option value="NIT">Nit</option>
-                                </select>
-                            </div>
-                            <div class="col">
+                            <div class="col-md-4  col-sm-12">
                                 <div class="form-group">
                                     <label>Numero de Documento</label>
                                     <input type="text" name="nit" id="nit" class="form-control" />
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-md-4  col-sm-12">
                                 <div class="form-gorup">
                                     <label>Nombre Completo</label>
                                     <input type="text" name="nombre_completo" id="nombrecompleto"
                                         class="form-control" />
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="form-group">
-                                    <span>1</span>
+                            <div class="col-md-4  col-sm-12">
+                                <div class="form-gorup">
+                                    <label>Apellido Completo</label>
+                                    <input type="text" name="ap_completo" id="ap_completo" class="form-control" />
                                 </div>
                             </div>
+
                         </div>
                         <div class="row">
                             <div class="col">
-                                <button type="submit" name="crear_op" id="crear_okp" class="btn btn-info">Crear</button>
+                                <div class="form-group">
+                                <button type="submit" name="crear_op" id="crear_op" class="btn btn-block btn-info">Crear</button>
+                                </div>
                             </div>
                         </div>
-
                     </form>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <div id="bq-boton">
+
+                                </div>
+                            
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- /.card-body -->
@@ -98,47 +108,7 @@
         <!-- /.card -->
 
         <!-- Default box -->
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Listado Oportunidades de Negocio</h3>
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
-                        title="Collapse">
-                        <i class="fas fa-minus"></i></button>
-                    <button type="button" class="btn btn-tool" data-card-widget="maximize"><i
-                            class="fas fa-expand"></i></button>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col">
-                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#crear_visita">
-                            Crear Visita
-                        </button>
-                    </div>
-                </div>
-                <div id="contenido">
-                    <table name="table_visitas" id="table_visitas">
-                        <thead>
-                            <tr>
-                                <th>Fecha</th>
-                                <th>Resultado </th>
-                                <th>Observacion</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                        </tbody>
-
-
-                    </table>
-                </div>
-            </div>
-            <!-- /.card-body -->
-            <div class="card-footer">
-            </div>
-            <!-- /.card-footer-->
-        </div>
+       
         <!-- /.card -->
         <?php
             else :
@@ -159,62 +129,17 @@
 </div>
 <!-- /.content-wrapper -->
 
-
-<div class="modal fade" id="crear_visita">
-    <div class="modal-dialog">
-        <form method="post">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Default Modal</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="">Fecha</label>
-                                <input type="date" name="fecha_vist" id="fecha_vist" class="form-control" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="result_visit">Resultado de la Visita</label>
-                                <input type="text" name="result_vist" id="result_visit" class="form-control" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="obs_visit">Observaciones</label>
-                                <input type="text" name="obs_visit" id="obs_visit" class="form-control" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Guardar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </form>
-    </div>
-    <!-- /.modal-content -->
-</div>
 <!-- /.modal-dialog -->
 </div>
 
 <?php include '../../../../layout/footer/footer4.php' ?>
+<script>
+$(document).ready(function(e) {
+    $(".progress").hide();
+});
+</script>
 
-
+<script src="ajax_crear.js"></script>
 
 </body>
 
