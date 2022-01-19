@@ -21,7 +21,7 @@ if (isset($_POST['nit']) && !empty($_POST['nit']) &&
     $nit = $_POST['nit'];
     $nombres = $_POST['nombre_completo'];
     $apellidos = $_POST['ap_completo'];
-    $status = 2;
+    $status = 3;
 
     
     

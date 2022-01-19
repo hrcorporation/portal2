@@ -23,14 +23,14 @@
 <script src="../../../node_modules/sweetalert2/dist/sweetalert2.js"></script>
 <script src="../../../node_modules/toastr/build/toastr.min.js"></script>
 <!-- Datatables -->
+<!-- vendor\almasaeed2010\adminlte\plugins\datatables -->
 <script src="../../../vendor/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
-<script src="../../../vendor/datatables/datatables/media/js/dataTables.bootstrap.min.js"></script>
 <script src="../../../vendor/datatables/datatables/media/js/dataTables.dataTables.min.js"></script>
 <script src="../../../vendor/datatables/datatables/media/js/dataTables.jqueryui.min.js"></script>
-<script src="../../../vendor/datatables/datatables/media/js/dataTables.material.min.js"></script>
-<script src="../../../vendor/datatables/datatables/media/js/dataTables.uikit.min.js"></script>
+<!-- <script src="../../../vendor/datatables/datatables/media/js/dataTables.material.min.js"></script> -->
+
 <!-- Adicionales para Formulario -->
 <script src="../../../vendor/almasaeed2010/adminlte/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 <script src="../../../bower_components/select2/dist/js/select2.full.min.js"></script>
 <script src="../../../bower_components/select2/dist/js/select2.min.js"></script>
-<script src="../../../vendor/almasaeed2010/adminlte/plugins/jquery-validation/additional-methods.min.js"></script>
+

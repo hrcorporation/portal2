@@ -33,8 +33,17 @@
 
             $modulos = array(1); // Array de roles para habilitar roles
             if ($login->validar_rol_user($modulos, $array_rol_user)) : // Validacion para habilitar el usuario
-                $t1_terceros = new t1_terceros();
+                $op = new oportunidad_negocio();
 
+                if (is_array($array_data = $op->getdata_oportunidad_negocio_for_id(intval($_GET['id'])))) {
+                    foreach ($array_data as $key) {
+                        $nidentificacion = $key['nidentificacion'];
+                        $nombres_completos = $key['nombrescompletos'];
+                        $apellidos_completos = $key['apellidoscompletos'];
+                        $estado = $key['status_op'];
+
+                    }
+                }
                 /**
                  * Card Body
                  */
@@ -58,12 +67,13 @@
                 </div>
                 <div id="contenido">
                     <form name="form_edit_op" id="form_edit_op" method="post">
+                        <input type="hidden" name="id_oportunidad_negocio" id="id_oportunidad_negocio" value="<?php echo $_GET['id']; ?>" />
                         <div class="row">
                             <div class="col">
                                 <div class="form-group clearfix">
                                     <div class="icheck-primary d-inline">
                                         <input type="checkbox" value="1" name="check_habilitar_cli"
-                                            id="check_habilitar_cli" ?>>
+                                            id="check_habilitar_cli" ?>
                                         <label for="check_habilitar_cli">
                                             Habilitar para modificar
                                         </label>
@@ -75,26 +85,36 @@
                             <div class="col-md-4  col-sm-12">
                                 <div class="form-group">
                                     <label>Numero de Documento</label>
-                                    <input type="text" name="nit" id="nit" class="form-control" value=""
-                                        disabled="true" />
+                                    <input type="text" name="nit" id="nit" class="form-control"
+                                        value="<?php echo $nidentificacion; ?>" disabled="true" />
                                 </div>
                             </div>
                             <div class="col-md-4  col-sm-12">
                                 <div class="form-gorup">
                                     <label>Nombre Completo</label>
                                     <input type="text" name="nombre_completo" id="nombre_completo" class="form-control"
-                                        disabled="true" />
+                                        value="<?php echo $nombres_completos; ?>" disabled="true" />
                                 </div>
                             </div>
                             <div class="col-md-4  col-sm-12">
                                 <div class="form-gorup">
                                     <label>Apellido Completo</label>
-                                    <input type="text" name="ap_completo" id="ap_completo" class="form-control"
+                                    <input type="text" name="ap_completo" id="ap_completo"
+                                        value="<?php echo $apellidos_completos ?>" class="form-control"
                                         disabled="true" />
                                 </div>
                             </div>
                         </div>
-                        <br>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>RESULTADO DE LA GESTION</label>
+                                    <select class="select2 form-control" name="resultado_op_edit" id="resultado_op_edit" disabled="true" >
+                                        <?php echo $op->select_resultado_op($estado) ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-12">
                                 <button type="submit" name="crear_op" id="crear_op" class="btn btn-info"
@@ -126,7 +146,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col">
-                        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#crear_visita">
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#crear_visita">
                             Crear Visita
                         </button>
                     </div>
@@ -167,70 +187,137 @@
 
         ?>
 
+
+        <div class="modal fade" id="crear_visita">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Crear Visita</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form name="form_add_visita" id="form_add_visita" method="post">
+                            <input type="hidden" name="id_cliente" id="id_clente"
+                                value="<?php echo intval($_GET['id']) ?>">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="">Fecha</label>
+                                        <input type="date" name="fecha_vist" id="fecha_vist" class="form-control" />
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="result_visit">Resultado de la Visita</label>
+                                        <select class="select2 form-control" name="result_vist" id="result_visit">
+                                            <?php echo $op->select_resultado_op($estado) ?>
+                                        </select>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="obs_visit">Observaciones</label>
+                                        <input type="text" name="obs_visit" id="obs_visit" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary">Guardar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+
+
+        <!--- Modal Editar Visita -->
+        <div class="modal fade" id="edit_visita">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Ver Visita</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form name="form_edit_visita" id="form_edit_visita" method="post">
+                            <input type="hidden" name="id_visita" id="id_visita" />
+                            <input type="hidden" name="id_clente_edit" id="id_clente_edit"
+                                value="<?php echo intval($_GET['id']) ?>">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="edit_fecha_vist">Fecha</label>
+                                        <input type="date" name="edit_fecha_vist" id="edit_fecha_vist"
+                                            class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="edit_result_visit">Resultado de la Visita</label>
+                                        <select class="select2 form-control" name="edit_result_visit" id="edit_result_visit">
+                                            <?php echo $op->select_resultado_op($estado) ?>
+                                        </select>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label for="edit_obs_visit">Observaciones</label>
+                                        <input type="text" name="edit_obs_visit" id="edit_obs_visit"
+                                            class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary">Actualizar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+
     </section>
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
 
 
-<div class="modal fade" id="crear_visita">
-    <div class="modal-dialog">
-        <form method="post">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Crear Visita</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form name="form_add_visita" id="form_add_visita" method="post">
-                        <input type="hidden" name="id_cliente" id="id_clente" value="10">
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="">Fecha</label>
-                                    <input type="date" name="fecha_vist" id="fecha_vist" class="form-control" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="result_visit">Resultado de la Visita</label>
-                                    <input type="text" name="result_vist" id="result_visit" class="form-control" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <label for="obs_visit">Observaciones</label>
-                                    <input type="text" name="obs_visit" id="obs_visit" class="form-control" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary">Guardar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
 
-        </form>
-    </div>
-    <!-- /.modal-content -->
-</div>
 <!-- /.modal-dialog -->
 </div>
 
 <?php include '../../../../layout/footer/footer4.php' ?>
 <script>
 $(document).ready(function(e) {
+    $('.select2').select2();
+
     $(".progress").hide();
     $('#check_habilitar_cli').click(function() {
         if (!$(this).is(':checked')) {
@@ -238,11 +325,14 @@ $(document).ready(function(e) {
             $("#nombre_completo").attr('disabled', true);
             $("#ap_completo").attr('disabled', true);
             $("#crear_op").attr('disabled', true);
+            $('#resultado_op_edit').attr('disabled',true);
         } else {
             $("#nit").attr('disabled', false);
             $("#nombre_completo").attr('disabled', false);
             $("#ap_completo").attr('disabled', false);
             $("#crear_op").attr('disabled', false);
+            $('#resultado_op_edit').attr('disabled',false);
+
         }
     });
 });
@@ -250,6 +340,32 @@ $(document).ready(function(e) {
 
 <script>
 $(document).ready(function(e) {
+
+
+    $("#fecha_vist").focus(function() {
+        let formData = new FormData();
+
+        formData.append('id_cliente', <?php echo intval($_GET['id']); ?>);
+
+        $.ajax({
+            url: "fecha_min.php",
+            type: "POST",
+            data: formData,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(data) {
+                console.log(data);
+                $("#fecha_vist").attr({
+                    "min": data.fecha,
+                });
+            },
+            error: function(respuesta) {
+                alert(JSON.stringify(respuesta));
+            },
+        });
+    });
+
 
     function datatable_visitas(id_cliente) {
         var table = $('#table_visitas').DataTable({
@@ -282,7 +398,7 @@ $(document).ready(function(e) {
                 },
                 {
                     "data": null,
-                    "defaultContent": "<button class='btn btn-warning btn-sm'> <i class='fas fa-edit'></i> Editar </button>"
+                    "defaultContent": "<button class='btn btn-warning btn-sm' data-toggle='modal' data-target='#edit_visita'> Editar </button> "
                 },
 
             ],
@@ -306,15 +422,60 @@ $(document).ready(function(e) {
 
 
 
-        if ($.fn.dataTable.isDataTable('#table_visitas')) {
-            table_visitas = $('#table_visitas').DataTable();
-            table_visitas.destroy();
-        }
-        table_visitas = datatable_visitas(10);
-        setInterval(function() {
-            table_visitas.ajax.reload(null, false);
-        }, 5000);
-    
+    if ($.fn.dataTable.isDataTable('#table_visitas')) {
+        table_visitas = $('#table_visitas').DataTable();
+        table_visitas.destroy();
+    }
+    var id_cliente = <?php echo intval($_GET['id']); ?>;
+    table_visitas = datatable_visitas(id_cliente);
+    setInterval(function() {
+        table_visitas.ajax.reload(null, false);
+    }, 5000);
+
+
+    $('#table_visitas tbody').on('click', 'button', function() {
+        var data = table_visitas.row($(this).parents('tr')).data();
+        var id = data['id'];
+
+        $('#id_visita').val(data['id'])
+        $('#edit_fecha_vist').val(data['fecha']);
+        //var resultado = data['resultado'];
+        
+
+        //$("#edit_result_visit option[value='']").prop("selected", 'selected');
+        //$('#edit_result_visit').val(data['resultado']);
+        $('#edit_obs_visit').val(data['obs']);
+
+    });
+
+
+    $("#form_edit_visita").on('submit', (function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: "php_edit_visita.php",
+            type: "POST",
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(data) {
+                console.log(data);
+                const datos_errores = Object.values(data.errores);
+                console.log(datos_errores);
+                if (data.estado) {
+                    toastr.success('visita Editada exitosamente');
+                } else {
+                    for (let index = 0; index < datos_errores.length; index++) {
+                        toastr.warning(data.errores[index]);
+                    }
+                }
+                $('#edit_visita').modal('toggle');
+            },
+            error: function(respuesta) {
+                alert(JSON.stringify(respuesta));
+            },
+        });
+    }));
 
 
     $("#form_add_visita").on('submit', (function(e) {
@@ -327,10 +488,42 @@ $(document).ready(function(e) {
             cache: false,
             processData: false,
             success: function(data) {
+                console.log(data);
                 const datos_errores = Object.values(data.errores);
                 console.log(datos_errores);
                 if (data.estado) {
                     toastr.success('visita creada exitosamente');
+                } else {
+                    for (let index = 0; index < datos_errores.length; index++) {
+                        toastr.warning(data.errores[index]);
+                    }
+                }
+                $('#crear_visita').modal('toggle');
+               
+
+                
+            },
+            error: function(respuesta) {
+                alert(JSON.stringify(respuesta));
+            },
+        });
+    }));
+
+    $("#form_edit_op").on('submit', (function(e) {
+        e.preventDefault();
+        $.ajax({
+            url: "editar_oportunidad.php",
+            type: "POST",
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(data) {
+                console.log(data);
+                const datos_errores = Object.values(data.errores);
+                console.log(datos_errores);
+                if (data.estado) {
+                    toastr.success('Oportunidad Editada exitosamente');
                 } else {
                     for (let index = 0; index < datos_errores.length; index++) {
                         toastr.warning(data.errores[index]);

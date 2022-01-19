@@ -12,7 +12,7 @@
     <link href="../../../assets/images/logos/LogoConcretol.png" rel="icon" type="image">
     <!-- Tema Adminlte -->
     <link rel="stylesheet" href="../../../vendor/almasaeed2010/adminlte/dist/css/adminlte.min.css" />
-    <link href="../custom/remi.css" rel="stylesheet" />
+   
     <!--Iconos -->
     <link rel="stylesheet" href="../../../vendor/almasaeed2010/adminlte/plugins/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
@@ -31,10 +31,10 @@
 
     <!-- Datatables -->
     <link rel="stylesheet" type="text/css" href="../../../vendor/datatables/datatables/media/css/jquery.dataTables.min.css" />
-    <link rel="stylesheet" type="text/css" href="../../../vendor/datatables/datatables/media/css/dataTables.bootstrap.min.css" />
+    
     <link rel="stylesheet" type="text/css" href="../../../vendor/datatables/datatables/media/css/dataTables.jqueryui.min.css" />
-    <link rel="stylesheet" type="text/css" href="../../../vendor/datatables/datatables/media/css/dataTables.material.min.css" />
-    <link rel="stylesheet" type="text/css" href="../../../vendor/datatables/datatables/media/css/dataTables.uikit.min.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="../../../vendor/datatables/datatables/media/css/dataTables.material.min.css" /> -->
+   
 </head>
 
 <body class="hold-transition sidebar-mini">

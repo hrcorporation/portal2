@@ -137,7 +137,7 @@
         $('#table_op tbody').on('click', 'button', function() {
             var data = table.row($(this).parents('tr')).data();
             var id = data['id'];
-            window.location = "verbatch/index.php?id=" + id;
+            window.location = "editar/editar.php?id=" + id;
         });
         setInterval(function() {
             table.ajax.reload(null, false);

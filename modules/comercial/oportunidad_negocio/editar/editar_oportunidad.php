@@ -14,13 +14,14 @@ $resultado = "";
 $op = new oportunidad_negocio;
 
 
-if (isset($_POST['id_cliente']) && !empty($_POST['id_cliente']) &&
-    isset($_POST['fecha_vist']) && !empty($_POST['fecha_vist'])
+if (isset($_POST['id_oportunidad_negocio']) && !empty($_POST['id_oportunidad_negocio']) &&
+    isset($_POST['nit']) && !empty($_POST['nit'])
 ){
-    $fecha = $_POST['fecha_vist'];
-    $id_cliente = $_POST['id_cliente'];
-    $resultado = $_POST['result_vist'];
-    $observacion = $_POST['obs_visit'];
+    $id = $_POST['id_oportunidad_negocio'];
+    $nombre_completo = $_POST['nombre_completo'];
+    $apellido_completo = $_POST['ap_completo'];
+    $numero_identificacion = $_POST['nit'];
+    $resultado = $_POST['resultado_op_edit'];
    
     
     /**
@@ -30,8 +31,8 @@ if (isset($_POST['id_cliente']) && !empty($_POST['id_cliente']) &&
      * 10- Rechazhado 
      */
     
-    if($id_lastinsert = $op->crear_visita($id_cliente,$fecha,$resultado,$observacion)){
-        $op->actualizar_resultado_op($id_cliente,$resultado);
+    if($id_lastinsert = $op->editar_oportunidad($id,$numero_identificacion,$nombre_completo, $apellido_completo, $resultado)){
+        $op->actualizar_resultado_op($id,$resultado);
         $php_estado = true;
 
     }else{
@@ -46,7 +47,7 @@ if (isset($_POST['id_cliente']) && !empty($_POST['id_cliente']) &&
 $datos = array(
     'estado' => $php_estado,
     'errores' => $errores,
-    'id_last' => $id_lastinsert,
+    
     'post' => $_POST,
 );
 
