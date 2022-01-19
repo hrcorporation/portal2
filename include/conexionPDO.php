@@ -1,5 +1,5 @@
 <?php //namespace librerias\conexionPDO;
-require 'config.php';
+require 'config_portal.php';
 
 
 class conexionPDO{
