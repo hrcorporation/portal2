@@ -22,6 +22,9 @@
 <script src="../../../../node_modules/sweetalert2/dist/sweetalert2.all.js"></script>
 <script src="../../../../node_modules/sweetalert2/dist/sweetalert2.js"></script>
 <script src="../../../../node_modules/toastr/build/toastr.min.js"></script>
+<!--summernote -->
+<!-- Summernote -->
+<script src="../../../../plugins/summernote/summernote-bs4.min.js"></script>
 <!-- Datatables -->
 <script src="../../../../vendor/datatables/datatables/media/js/jquery.dataTables.min.js"></script>
 <script src="../../../../vendor/datatables/datatables/media/js/dataTables.dataTables.min.js"></script>

@@ -416,6 +416,40 @@ class t26_remisiones extends conexionPDO
     }
   }
 
+  function metros_cubi_remi($id_remision, $metros_cubicos)
+  {
+    $this->id_remision = (int)$id_remision;
+    $this->metros_cubicos = doubleval($metros_cubicos);
+    $sql = "UPDATE `ct26_remisiones` SET `ct26_metros`= :metros_cubicos WHERE `ct26_remisiones`.`ct26_id_remision` = :id_remision";
+    $stmt = $this->con->prepare($sql);
+    $stmt->bindParam(':metros_cubicos', $this->metros_cubicos, PDO::PARAM_STR);
+    $stmt->bindParam(':id_remision', $this->id_remision, PDO::PARAM_INT);
+
+
+    if ($stmt->execute()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  function numero_remi($id_remision, $num_remi)
+  {
+    $this->id_remision = (int)$id_remision;
+    $this->num_remi = (int)$num_remi;
+    $sql = "UPDATE `ct26_remisiones` SET `ct26_codigo_remi`= :num_remi WHERE `ct26_remisiones`.`ct26_id_remision` = :id_remision";
+    $stmt = $this->con->prepare($sql);
+    $stmt->bindParam(':num_remi', $this->num_remi, PDO::PARAM_INT);
+    $stmt->bindParam(':id_remision', $this->id_remision, PDO::PARAM_INT);
+
+
+    if ($stmt->execute()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   function estado_remi($id_remision, $estado)
   {
     $this->id_remision = (int)$id_remision;

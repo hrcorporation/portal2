@@ -1069,7 +1069,6 @@ class t1_terceros extends conexionPDO
         $stmt = $this->con->prepare($sql);
 
         // Asignando Datos ARRAY => SQL
-        $stmt->bindParam(':id_tercero', $this->id, PDO::PARAM_INT);
         // Ejecutar 
         $result = $stmt->execute();
 

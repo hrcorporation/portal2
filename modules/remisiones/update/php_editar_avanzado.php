@@ -21,6 +21,34 @@ $php_error;
 if (isset($_POST['id']) && !empty($_POST['id'])) {
     $id_remision = (int)htmlspecialchars($_POST['id']);
 
+
+    // metros Cubicos
+    if(isset($_POST['check_hab_m3']) || !empty($_POST['check_hab_m3'])){
+        $txt_m3 = htmlspecialchars($_POST['txt_m3']);
+        if($t26_remisiones->metros_cubi_remi($id_remision,$txt_m3)){
+            $php_estado = true;
+            $php_error[] = "Los metros cubicos de la Remision Actualizada Correctamente";
+        }else{
+            $php_error[] = "Error al Actualizar la remision";
+        }
+
+    }
+
+
+
+    // Numero Remision
+    if(isset($_POST['check_habilitar_nremision']) || !empty($_POST['check_habilitar_nremision'])){
+        $txt_nremi = htmlspecialchars($_POST['txt_nremi']);
+        if($t26_remisiones->numero_remi($id_remision,$txt_nremi)){
+            $php_estado = true;
+            $php_error[] = "El Numero de la Remision Actualizada Correctamente";
+        }else{
+            $php_error[] = "Error al Actualizar la remision";
+        }
+
+    }
+
+
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////////

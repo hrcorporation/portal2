@@ -6,72 +6,7 @@
 require '../../../modelos/autoload.php';
 require '../../../vendor/autoload.php'; ?>
 
-<?php
 
-switch ($rol_user) {
-    case 1:
-    case 8:
-    case 15:
-    case 16:
-    case 17:
-    case 20:
-    case 29:
-    case 22:
-    case 26:
-    case 27:
-        $t26_remisiones = new t26_remisiones();
-        $t1_terceros = new t1_terceros();
-        $php_clases = new php_clases();
-        $t5_obras = new t5_obras();
-        $t10_vehiculo = new t10_vehiculo();
-        break;
-
-    default:
-        print('<script> window.location = "../index.php"</script>');
-
-        break;
-}
-
-
-
-
-$id_remision  = $_GET['id'];
-//$id_remision  = $php_clases->HR_Crypt($_GET['id'], 2);
-
-$array_roles = array(1, 8, 15,16,20, 22,29);
-$permisos = $php_clases->permisos($rol_user, $array_roles);
-
-$datos_remision = $t26_remisiones->get_remision_id($id_remision);
-
-while ($fila_remi = $datos_remision->fetch(PDO::FETCH_ASSOC)) {
-
-    $id_obra = $fila_remi['ct26_idObra'];
-    $nombre_obra = $fila_remi['ct26_nombre_obra'];
-
-    $id_cliente = $fila_remi['ct26_idcliente'];
-    $nombre_cliente = $fila_remi['ct26_razon_social'];
-    $codigo_remi = $fila_remi['ct26_codigo_remi'];
-    $img_remi = $fila_remi['ct26_imagen_remi'];
-    $id_conductor = $fila_remi['ct26_conductor'];
-    $id_placa = $fila_remi['ct26_id_vehiculo'];
-    $placa = $fila_remi['ct26_vehiculo'];
-    $estado = $fila_remi['ct26_estado'];
-
-    $hora_salida_planta = $fila_remi['ct26_hora_salida_planta'];
-
-
-    $hora_llegada_obra = $fila_remi['ct26_hora_llegada_obra'];
-
-    $hora_inicio_descargue = $fila_remi['ct26_hora_inicio_descargue'];
-
-    $hora_teminada_descargue = $fila_remi['ct26_hora_terminada_descargue'];
-
-    $hora_llegada_planta = $fila_remi['ct26_hora_llegada_planta'];
-}
-
-
-
-?>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -97,17 +32,65 @@ while ($fila_remi = $datos_remision->fetch(PDO::FETCH_ASSOC)) {
     <!-- Main content -->
     <section class="content">
 
+        <?php
+        /**
+         * Validacion de Usuario
+         */
+$id_remision  = $_GET['id'];
+
+        if (is_array($array_rol_user =  $login->get_rol_tercero($_SESSION['id_usuario']))) :
+
+            $modulos = array(1); // Array de roles para habilitar roles
+            if ($login->validar_rol_user($modulos, $array_rol_user)) : // Validacion para habilitar el usuario
+                $t26_remisiones = new t26_remisiones();
+        $t1_terceros = new t1_terceros();
+        $php_clases = new php_clases();
+        $t5_obras = new t5_obras();
+        $t10_vehiculo = new t10_vehiculo();
+        $datos_remision = $t26_remisiones->get_remision_id($id_remision);
+
+while ($fila_remi = $datos_remision->fetch(PDO::FETCH_ASSOC)) {
+
+    $id_obra = $fila_remi['ct26_idObra'];
+    $nombre_obra = $fila_remi['ct26_nombre_obra'];
+
+    $id_cliente = $fila_remi['ct26_idcliente'];
+    $nombre_cliente = $fila_remi['ct26_razon_social'];
+    $codigo_remi = $fila_remi['ct26_codigo_remi'];
+    $img_remi = $fila_remi['ct26_imagen_remi'];
+    $id_conductor = $fila_remi['ct26_conductor'];
+    $id_placa = $fila_remi['ct26_id_vehiculo'];
+    $placa = $fila_remi['ct26_vehiculo'];
+    $estado = $fila_remi['ct26_estado'];
+
+    $hora_salida_planta = $fila_remi['ct26_hora_salida_planta'];
+    $hora_llegada_obra = $fila_remi['ct26_hora_llegada_obra'];
+    $hora_inicio_descargue = $fila_remi['ct26_hora_inicio_descargue'];
+    $hora_teminada_descargue = $fila_remi['ct26_hora_terminada_descargue'];
+    $hora_llegada_planta = $fila_remi['ct26_hora_llegada_planta'];
+}        
+        
+        /**
+                 * Card Body
+                 */
+        ?>
+
+
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
 
 
 
-                <h3 class="card-title"><a href='editar_avanzado.php?id=<?php print_r($id_remision); ?>'><i class="fas fa-tools"></i></a> Remision <strong> <?php print_r($codigo_remi); ?> </strong></h3>
+                <h3 class="card-title"><a href='editar_avanzado.php?id=<?php print_r($id_remision); ?>'><i
+                            class="fas fa-tools"></i></a> Remision <strong> <?php print_r($codigo_remi); ?> </strong>
+                </h3>
                 <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
+                        title="Collapse">
                         <i class="fas fa-minus"></i></button>
-                    <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
+                    <button type="button" class="btn btn-tool" data-card-widget="maximize"><i
+                            class="fas fa-expand"></i></button>
 
                 </div>
             </div>
@@ -187,7 +170,8 @@ while ($fila_remi = $datos_remision->fetch(PDO::FETCH_ASSOC)) {
                                 <div class="form-group">
                                     <div class="form-group clearfix">
                                         <div class="icheck-primary d-inline">
-                                            <input type="checkbox" id="check_habilitar" name="check_habilitar" value="1">
+                                            <input type="checkbox" id="check_habilitar" name="check_habilitar"
+                                                value="1">
                                             <label for="check_habilitar">
                                                 Seleccione Subir Remision fisica
                                             </label>
@@ -200,13 +184,15 @@ while ($fila_remi = $datos_remision->fetch(PDO::FETCH_ASSOC)) {
                             <div class="col-2">
                                 <div class="form-group">
                                     <label>Subir Imagen</label>
-                                    <input type="radio" class="form-control tipoarchivo" name="subirtipo" value="image/x-png,image/jpeg" required checked="">
+                                    <input type="radio" class="form-control tipoarchivo" name="subirtipo"
+                                        value="image/x-png,image/jpeg" required checked="">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="form-group">
                                     <label>Subir PDF</label>
-                                    <input type="radio" class="form-control tipoarchivo" name="subirtipo" value="application/pdf" required>
+                                    <input type="radio" class="form-control tipoarchivo" name="subirtipo"
+                                        value="application/pdf" required>
                                 </div>
                             </div>
                             <div class="col-2">
@@ -216,13 +202,15 @@ while ($fila_remi = $datos_remision->fetch(PDO::FETCH_ASSOC)) {
                                         $img_remi = "../ver_remision/remision.php?id=" .  $php_clases->HR_Crypt($id_remision, 1);
                                     }
                                     ?>
-                                    <a target="_blank" href="<?php echo $img_remi ?>" class="btn btn-info"> <i class="fas fa-eye"></i> Ver Remision</a>
+                                    <a target="_blank" href="<?php echo $img_remi ?>" class="btn btn-info"> <i
+                                            class="fas fa-eye"></i> Ver Remision</a>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
                                     <div>
-                                        <input type="file" class="form-control" name="imgfiles" id="imgfiles" accept="image/x-png,image/jpeg" disabled="disabled" required="required" />
+                                        <input type="file" class="form-control" name="imgfiles" id="imgfiles"
+                                            accept="image/x-png,image/jpeg" disabled="disabled" required="required" />
                                         <label class="" for="imgfiles">Seleccionar Archivo</label>
                                     </div>
                                     <!-- <input class="form-control" type="file" name="imgfiles2" id="imgfiles2" accept="image/x-png,image/jpeg" disabled="disabled" />
@@ -236,26 +224,16 @@ while ($fila_remi = $datos_remision->fetch(PDO::FETCH_ASSOC)) {
                                 <div class="form-group">
                                     <?php
 
-                                    switch ($rol_user) {
-                                        case 1:
-                                        case 15:
-                                        case 16:
-                                        case 20:
-                                        case 22:
-                                        case 26:
-
-                                            $disabled = "  ";
-                                            break;
-
-                                        default:
-                                            $disabled = " disabled = 'true' ";
-                                            break;
-                                    }
-
+if($login->validar_rol_user([1,15,16,20,22,26], $array_rol_user)){
+    $disabled = "  ";
+}else{
+    $disabled = " disabled = 'true' ";
+}
                                     ?>
                                     <div class="form-group clearfix">
                                         <div class="icheck-primary d-inline">
-                                            <input type="checkbox" value="1" name="check_habilitar_horas" id="check_habilitar_horas" <?php print_r($disabled); ?>>
+                                            <input type="checkbox" value="1" name="check_habilitar_horas"
+                                                id="check_habilitar_horas" <?php print_r($disabled); ?>>
                                             <label for="check_habilitar_horas">
                                                 Seleccione para editar Horas
                                             </label>
@@ -269,32 +247,37 @@ while ($fila_remi = $datos_remision->fetch(PDO::FETCH_ASSOC)) {
                                 <div class="form-group">
                                     <label for="h_salida_mix_planta">HORA DE SALIDA MIXER DE PLANTA</label>
 
-                                    <input type="time" name="h_salida_mix_planta" id="h_salida_mix_planta" value='<?php echo $hora_salida_planta ?>' disabled="disabled">
+                                    <input type="time" name="h_salida_mix_planta" id="h_salida_mix_planta"
+                                        value='<?php echo $hora_salida_planta ?>' disabled="disabled">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
                                     <label for="h_llegada_mix_obra">HORA DE LLEGADA MIXER A OBRA</label>
-                                    <input type="time" name="h_llegada_mix_obra" id="h_llegada_mix_obra" value="<?php echo $hora_llegada_obra ?>" disabled="disabled">
+                                    <input type="time" name="h_llegada_mix_obra" id="h_llegada_mix_obra"
+                                        value="<?php echo $hora_llegada_obra ?>" disabled="disabled">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
                                     <label for="h_inicio_descargue">HORA DE INICIO DE DESCARGUE</label>
-                                    <input type="time" name="h_inicio_descargue" id="h_inicio_descargue" value="<?php echo $hora_inicio_descargue ?>" disabled="disabled">
+                                    <input type="time" name="h_inicio_descargue" id="h_inicio_descargue"
+                                        value="<?php echo $hora_inicio_descargue ?>" disabled="disabled">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
                                     <label for="h_terminacion_descargue">HORA DE TERMINACION DE DESCARGUE</label>
-                                    <input type="time" name="h_terminacion_descargue" id="h_terminacion_descargue" value="<?php echo $hora_teminada_descargue ?>" disabled="disabled">
+                                    <input type="time" name="h_terminacion_descargue" id="h_terminacion_descargue"
+                                        value="<?php echo $hora_teminada_descargue ?>" disabled="disabled">
                                 </div>
                             </div>
 
                             <div class="col">
                                 <div class="form-group">
                                     <label for="h_llegada_mix_planta">HORA DE LLEGADA MIXER EN PLANTA</label>
-                                    <input type="time" name="h_llegada_mix_planta" id="h_llegada_mix_planta" value="<?php echo  $hora_llegada_planta ?>" disabled="disabled">
+                                    <input type="time" name="h_llegada_mix_planta" id="h_llegada_mix_planta"
+                                        value="<?php echo  $hora_llegada_planta ?>" disabled="disabled">
                                 </div>
                             </div>
                         </div>
@@ -302,25 +285,47 @@ while ($fila_remi = $datos_remision->fetch(PDO::FETCH_ASSOC)) {
                         <div class="row">
                             <div class="col-2">
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-block bg-gradient-success" name="btn_actualizar_remi" id="btn_actualizar_remi"> Actualizar</button>
+                                    <button type="submit" class="btn btn-block bg-gradient-success"
+                                        name="btn_actualizar_remi" id="btn_actualizar_remi"> Actualizar</button>
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="form-group">
-                                    <button type="button" class="btn btn-block bg-gradient-primary" data-toggle="modal" data-target="#modal-novedades"> <i class="fas fa-info-circle"></i> Novedades</button>
+                                    <button type="button" class="btn btn-block bg-gradient-primary" data-toggle="modal"
+                                        data-target="#modal-novedades"> <i class="fas fa-info-circle"></i>
+                                        Novedades</button>
                                 </div>
                             </div>
-                            <div class="col-2">
-                                <div class="form-group">
-                                    <button type="button" class="btn btn-block bg-gradient-orange" data-toggle="modal" data-target="#modal-anular" <?php echo $permisos ?>> <i class="fas fa-ban"></i> Anular</button>
-                                </div>
-                            </div>
+                            <?php
 
+if($login->validar_rol_user([1], $array_rol_user)){
+    $btn_anular = "  ";
+}else{
+    $btn_anular = " disabled = 'true' ";
+}
+                                    ?>
+                            <div class="col-2">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-block bg-gradient-orange" data-toggle="modal"
+                                        data-target="#modal-anular" <?php echo $btn_anular ?>> <i class="fas fa-ban"></i>
+                                        Anular</button>
+                                </div>
+                            </div>
+                            <?php
+
+if($login->validar_rol_user([1], $array_rol_user)){
+    $btn_eliminar = "  ";
+}else{
+    $btn_eliminar = " disabled = 'true' ";
+}
+                                    ?>
                             <!-- /.modal -->
                             <div class="col-3"></div>
                             <div class="col-3">
                                 <div class="form-group">
-                                    <button type="button" class="btn btn-block bg-gradient-danger" data-toggle="modal" data-target="#modal-eliminar" <?php echo $permisos ?>> <i class="fas fa-trash"></i> Eliminar Remision</button>
+                                    <button type="button" class="btn btn-block bg-gradient-danger" data-toggle="modal"
+                                        data-target="#modal-eliminar" <?php echo $btn_eliminar ?>> <i
+                                            class="fas fa-trash"></i> Eliminar Remision</button>
                                 </div>
 
 
@@ -352,7 +357,8 @@ while ($fila_remi = $datos_remision->fetch(PDO::FETCH_ASSOC)) {
                         <div class="modal-body">
                             <div class="form-group">
 
-                                <textarea class="form-control" rows="3" name="txt_novedades" id="txt_novedades" maxlength="700"></textarea>
+                                <textarea class="form-control" rows="3" name="txt_novedades" id="txt_novedades"
+                                    maxlength="700"></textarea>
 
                             </div>
                         </div>
@@ -377,7 +383,8 @@ while ($fila_remi = $datos_remision->fetch(PDO::FETCH_ASSOC)) {
                         <div class="modal-body">
                             <div class="form-group">
                                 <label>Escriba la Razon de anular la remision</label>
-                                <input type="text" name="txt_rz_anular" id="txt_rz_anular" class="form-control" required>
+                                <input type="text" name="txt_rz_anular" id="txt_rz_anular" class="form-control"
+                                    required>
                             </div>
                         </div>
                         <div class="modal-footer justify-content-between">
@@ -401,7 +408,8 @@ while ($fila_remi = $datos_remision->fetch(PDO::FETCH_ASSOC)) {
                         <div class="modal-body">
                             <div class="form-group">
                                 <label>Escriba la Razon de eliminar la remision</label>
-                                <input type="text" name="txt_rz_eliminar" id="txt_rz_eliminar" class="form-control" required>
+                                <input type="text" name="txt_rz_eliminar" id="txt_rz_eliminar" class="form-control"
+                                    required>
                             </div>
                         </div>
                         <div class="modal-footer justify-content-between">
@@ -414,9 +422,21 @@ while ($fila_remi = $datos_remision->fetch(PDO::FETCH_ASSOC)) {
                 <!-- /.modal-dialog -->
             </div>
         </div>
-</div>
+        <?php
+            else :
+            ?>
+        <div class="callout callout-warning">
+            <h5>No posee permisos en este modulo</h5>
+        </div>
+        <?php
+            endif;
+        else :
+            header('location : ../../cerrar.php');
+        endif;
 
-</section>
+        ?>
+
+    </section>
 </div>
 
 
@@ -425,206 +445,206 @@ while ($fila_remi = $datos_remision->fetch(PDO::FETCH_ASSOC)) {
 
 
 <script>
-    $(document).ready(function() {
-        $('.select2').select2();
+$(document).ready(function() {
+    $('.select2').select2();
 
+});
+$(document).ready(function() {
+    $('.tipoarchivo').change(function() {
+        $('#imgfiles').attr("accept", $('input[name=subirtipo]:checked').val());
     });
-    $(document).ready(function() {
-        $('.tipoarchivo').change(function() {
-            $('#imgfiles').attr("accept", $('input[name=subirtipo]:checked').val());
-        });
-    });
+});
 </script>
 
 <script>
-    $(document).ready(function() {
-        $("#form_update").on('submit', (function(e) {
-            e.preventDefault();
+$(document).ready(function() {
+    $("#form_update").on('submit', (function(e) {
+        e.preventDefault();
 
-            $.ajax({
-                url: "php_editar.php",
-                type: "POST",
-                data: new FormData(this),
-                contentType: false,
-                cache: false,
-                processData: false,
-                success: function(data) {
+        $.ajax({
+            url: "php_editar.php",
+            type: "POST",
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(data) {
 
-                    const datos_errores = Object.values(data.errores);
-                    console.log(datos_errores);
-                    if (data.estado) {
-                        toastr.success('exitoso');
+                const datos_errores = Object.values(data.errores);
+                console.log(datos_errores);
+                if (data.estado) {
+                    toastr.success('exitoso');
 
-                    } else {
-                        for (let index = 0; index < datos_errores.length; index++) {
+                } else {
+                    for (let index = 0; index < datos_errores.length; index++) {
 
-                            toastr.warning(data.errores[index]);
-                        }
+                        toastr.warning(data.errores[index]);
                     }
-                },
-                error: function(respuesta) {
-                    alert(JSON.stringify(respuesta));
-                },
-            });
-        }));
+                }
+            },
+            error: function(respuesta) {
+                alert(JSON.stringify(respuesta));
+            },
+        });
+    }));
+});
+
+$(document).ready(function() {
+
+
+    $("#btn-novedad").click(function() {
+
+
+
+
+        var id_remi = "<?php echo $_GET['id'] ?>";
+
+        var txt_novedades = $('#txt_novedades').val();
+
+
+        $.ajax({
+            url: "php_novedades.php",
+            type: "POST",
+            data: {
+                id_remi: id_remi,
+                txt_novedades: txt_novedades,
+            },
+            success: function(response) {
+                console.log(response.estado);
+                if (response.estado) {
+                    toastr.success("Novedad Guardada Correctamente");
+
+                } else {
+                    toastr.warning("Error al guardar la novedad");
+                    toastr.warning("Contactar con el Administrador");
+                }
+            },
+            error: function(respuesta) {
+                alert(JSON.stringify(respuesta));
+                window.window.location = url;
+            },
+
+        });
     });
 
-    $(document).ready(function() {
-
-
-        $("#btn-novedad").click(function() {
 
 
 
 
-            var id_remi = "<?php echo $_GET['id'] ?>";
-
-            var txt_novedades = $('#txt_novedades').val();
+    $("#btn-eliminar").click(function() {
 
 
-            $.ajax({
-                url: "php_novedades.php",
-                type: "POST",
-                data: {
-                    id_remi: id_remi,
-                    txt_novedades: txt_novedades,
-                },
-                success: function(response) {
-                    console.log(response.estado);
-                    if (response.estado) {
-                        toastr.success("Novedad Guardada Correctamente");
 
-                    } else {
-                        toastr.warning("Error al guardar la novedad");
-                        toastr.warning("Contactar con el Administrador");
-                    }
-                },
-                error: function(respuesta) {
-                    alert(JSON.stringify(respuesta));
+
+        var id_remi = "<?php echo $_GET['id'] ?>";
+        var url = "../index.php";
+        var txt_rz_eliminar = $('#txt_rz_eliminar').val();
+
+
+        $.ajax({
+            url: "php_eliminar.php",
+            type: "POST",
+            data: {
+                id_remi: id_remi,
+                txt_rz_eliminar: txt_rz_eliminar,
+
+
+            },
+            success: function(response) {
+                console.log(response.estado);
+                if (response.estado) {
                     window.window.location = url;
-                },
+                } else {
+                    toastr.warning("Error al eliminar la remision");
+                    toastr.warning("Contactar con el Administrador");
+                }
+            },
+            error: function(respuesta) {
+                alert(JSON.stringify(respuesta));
+                window.window.location = url;
+            },
 
-            });
         });
+    });
+    $("#btn-anular").click(function() {
 
+        var id_remi = "<?php echo $_GET['id'] ?>";
+        var rz_anular = $('#C_IdTerceros').val();
+        //var url = "../index.php";
+        $.ajax({
+            url: "php_anular.php",
+            type: "POST",
+            data: {
+                id_remi: id_remi,
+                rz_anular: rz_anular,
 
+            },
+            success: function(response) {
+                if (response.estado) {
+                    toastr.success("Anulo Exitosamente la remision");
+                    location.reload();
 
+                } else {
+                    toastr.warning("Error al anular la remision");
+                    toastr.warning("Contactar con el Administrador");
+                }
+            },
+            error: function(respuesta) {
+                alert(JSON.stringify(respuesta));
+            },
 
-
-        $("#btn-eliminar").click(function() {
-
-
-
-
-            var id_remi = "<?php echo $_GET['id'] ?>";
-            var url = "../index.php";
-            var txt_rz_eliminar = $('#txt_rz_eliminar').val();
-
-
-            $.ajax({
-                url: "php_eliminar.php",
-                type: "POST",
-                data: {
-                    id_remi: id_remi,
-                    txt_rz_eliminar: txt_rz_eliminar,
-
-
-                },
-                success: function(response) {
-                    console.log(response.estado);
-                    if (response.estado) {
-                        window.window.location = url;
-                    } else {
-                        toastr.warning("Error al eliminar la remision");
-                        toastr.warning("Contactar con el Administrador");
-                    }
-                },
-                error: function(respuesta) {
-                    alert(JSON.stringify(respuesta));
-                    window.window.location = url;
-                },
-
-            });
         });
-        $("#btn-anular").click(function() {
+    });
 
-            var id_remi = "<?php echo $_GET['id'] ?>";
-            var rz_anular = $('#C_IdTerceros').val();
-            //var url = "../index.php";
-            $.ajax({
-                url: "php_anular.php",
-                type: "POST",
-                data: {
-                    id_remi: id_remi,
-                    rz_anular: rz_anular,
-
-                },
-                success: function(response) {
-                    if (response.estado) {
-                        toastr.success("Anulo Exitosamente la remision");
-                        location.reload();
-
-                    } else {
-                        toastr.warning("Error al anular la remision");
-                        toastr.warning("Contactar con el Administrador");
-                    }
-                },
-                error: function(respuesta) {
-                    alert(JSON.stringify(respuesta));
-                },
-
-            });
+    $('#C_IdTerceros').on('change', function() {
+        $.ajax({
+            url: "get_data.php",
+            type: "POST",
+            data: {
+                idCliente: ($('#C_IdTerceros').val()),
+                task: "1",
+            },
+            success: function(response) {
+                console.log(response.estado);
+                $('#C_Obras').html(response.obras);
+            },
+            error: function(respuesta) {
+                alert(JSON.stringify(respuesta));
+            },
         });
-
-        $('#C_IdTerceros').on('change', function() {
-            $.ajax({
-                url: "get_data.php",
-                type: "POST",
-                data: {
-                    idCliente: ($('#C_IdTerceros').val()),
-                    task: "1",
-                },
-                success: function(response) {
-                    console.log(response.estado);
-                    $('#C_Obras').html(response.obras);
-                },
-                error: function(respuesta) {
-                    alert(JSON.stringify(respuesta));
-                },
-            });
-        });
-    })
+    });
+})
 </script>
 
 <script>
-    $(document).ready(function() {
+$(document).ready(function() {
 
-        $('#check_habilitar').click(function() {
-            if (!$(this).is(':checked')) {
+    $('#check_habilitar').click(function() {
+        if (!$(this).is(':checked')) {
 
-                $("#imgfiles").attr('disabled', true);
-            } else {
-                $("#imgfiles").attr('disabled', false);
-            }
-        });
-
-        $('#check_habilitar_horas').click(function() {
-            if (!$(this).is(':checked')) {
-                $("#h_salida_mix_planta").attr('disabled', true);
-                $("#h_llegada_mix_obra").attr('disabled', true);
-                $("#h_inicio_descargue").attr('disabled', true);
-                $("#h_terminacion_descargue").attr('disabled', true);
-                $("#h_llegada_mix_planta").attr('disabled', true);
-            } else {
-                $("#h_salida_mix_planta").attr('disabled', false);
-                $("#h_llegada_mix_obra").attr('disabled', false);
-                $("#h_inicio_descargue").attr('disabled', false);
-                $("#h_terminacion_descargue").attr('disabled', false);
-                $("#h_llegada_mix_planta").attr('disabled', false);
-            }
-        });
-
+            $("#imgfiles").attr('disabled', true);
+        } else {
+            $("#imgfiles").attr('disabled', false);
+        }
     });
+
+    $('#check_habilitar_horas').click(function() {
+        if (!$(this).is(':checked')) {
+            $("#h_salida_mix_planta").attr('disabled', true);
+            $("#h_llegada_mix_obra").attr('disabled', true);
+            $("#h_inicio_descargue").attr('disabled', true);
+            $("#h_terminacion_descargue").attr('disabled', true);
+            $("#h_llegada_mix_planta").attr('disabled', true);
+        } else {
+            $("#h_salida_mix_planta").attr('disabled', false);
+            $("#h_llegada_mix_obra").attr('disabled', false);
+            $("#h_inicio_descargue").attr('disabled', false);
+            $("#h_terminacion_descargue").attr('disabled', false);
+            $("#h_llegada_mix_planta").attr('disabled', false);
+        }
+    });
+
+});
 </script>
 
 

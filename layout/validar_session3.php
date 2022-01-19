@@ -4,7 +4,7 @@
  * Inicio de sesion
  */
 session_start();
-//ob_start();
+ob_start();
 
 /**
  * Condicional para Validar Sesion

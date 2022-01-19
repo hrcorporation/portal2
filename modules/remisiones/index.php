@@ -6,31 +6,7 @@
 require '../../modelos/autoload.php';
 require '../../vendor/autoload.php'; ?>
 
-<?php
-switch ($rol_user) {
-    case 1:
-    case 3:
-    case 8:
-    case 15:
-    case 16:
-    case 17:
-    case 19:
-    case 20:
-    case 22:
-    case 26:
-    case 27:
-    case 29:
-        $php_clases = new php_clases();
-        $t1_terceros = new t1_terceros();
-        $t5_obras = new t5_obras();
-        break;
 
-    default:
-        print('<script> window.location = "../index.php"</script>');
-
-        break;
-}
-?>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -55,6 +31,22 @@ switch ($rol_user) {
 
     <!-- Main content -->
     <section class="content">
+
+    <?php
+        /**
+         * Validacion de Usuario
+         */
+        if (is_array($array_rol_user =  $login->get_rol_tercero($_SESSION['id_usuario']))) :
+
+            $modulos = array(1); // Array de roles para habilitar roles
+            if ($login->validar_rol_user($modulos, $array_rol_user)) : // Validacion para habilitar el usuario
+                $php_clases = new php_clases();
+        $t1_terceros = new t1_terceros();
+        $t5_obras = new t5_obras();
+                /**
+                 * Card Body
+                 */
+        ?>
 
         <!-- Default box -->
         <div class="card">
@@ -107,6 +99,20 @@ switch ($rol_user) {
 
         </div>
         <!-- /.card -->
+
+        <?php
+            else :
+            ?>
+        <div class="callout callout-warning">
+            <h5>No posee permisos en este modulo</h5>
+        </div>
+        <?php
+            endif;
+        else :
+            header('location : ../../cerrar.php');
+        endif;
+
+        ?>
 
     </section>
     <!-- /.content -->
