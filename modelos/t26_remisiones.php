@@ -1080,6 +1080,24 @@ class t26_remisiones extends conexionPDO
     $this->PDO->closePDO();
   }
 
+  function razon_anular_remision($id_remision,$razon_anular)
+  {
+    $this->id_remision = $id_remision;
+    $this->razon_anular = $razon_anular;
+    $sql = "UPDATE `ct26_remisiones` SET ct26_observaciones = :obs, `ct26_razon_anular` = :razon_anular WHERE `ct26_remisiones`.`ct26_id_remision` = :id_remision";
+    $stmt = $this->con->prepare($sql);
+
+    $stmt->bindParam(':id_remision', $this->id_remision, PDO::PARAM_INT);
+    $stmt->bindParam(':obs', $this->razon_anular, PDO::PARAM_STR);
+    $stmt->bindParam(':razon_anular', $this->razon_anular, PDO::PARAM_STR);
+    // Ejecutar 
+    if ($stmt->execute()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   function anular_remision($id_remision)
   {
     $this->id_remision = $id_remision;

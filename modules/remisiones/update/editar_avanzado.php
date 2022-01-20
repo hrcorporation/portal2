@@ -84,7 +84,7 @@ if($login->validar_rol_user([1,8, 20, 22,29], $array_rol_user)){
 }
                                     ?>
 
-<?php
+        <?php
 
 if($login->validar_rol_user([1], $array_rol_user)){
     $permisos_m3 = "  ";
@@ -212,7 +212,8 @@ if($login->validar_rol_user([1], $array_rol_user)){
                                     <div class="col-2">
                                         <div class="form-group clearfix">
                                             <div class="icheck-primary d-inline">
-                                                <input type="checkbox" id="check_hab_m3" name="check_hab_m3" value="1" <?php print_r($permisos_m3); ?> >
+                                                <input type="checkbox" id="check_hab_m3" name="check_hab_m3" value="1"
+                                                    <?php print_r($permisos_m3); ?>>
                                                 <label for="check_hab_m3">
                                                     Habilitar m3
                                                 </label>
@@ -534,7 +535,7 @@ if($login->validar_rol_user([1, 20, 22,26], $array_rol_user)){
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label>Escriba la Razon de anular la remision</label>
+                                <label>Escriba la Razon de anular la remision por favor</label>
                                 <input type="text" name="txt_rz_anular" id="txt_rz_anular" class="form-control"
                                     required>
                             </div>
@@ -643,31 +644,16 @@ $(document).ready(function() {
 
 $(document).ready(function() {
 
-
-
-
-
-
-
-
     $("#btn-eliminar").click(function() {
-
-
-
-
         var id_remi = "<?php echo $_GET['id'] ?>";
         var url = "../index.php";
         var txt_rz_eliminar = $('#txt_rz_eliminar').val();
-
-
         $.ajax({
             url: "php_eliminar.php",
             type: "POST",
             data: {
                 id_remi: id_remi,
                 txt_rz_eliminar: txt_rz_eliminar,
-
-
             },
             success: function(response) {
                 console.log(response.estado);
@@ -685,19 +671,20 @@ $(document).ready(function() {
 
         });
     });
-    $("#btn-anular").click(function() {
 
-        var id_remi = "<?php echo $_GET['id'] ?>";
-        var rz_anular = $('#C_IdTerceros').val();
+    $("#btn-anular").click(function() {
+        alert($('#txt_rz_anular').val());
+        let formData_anular = new FormData();
+
+        formData_anular.append('key2', 'value2');
+        formData_anular.append('id_remi', "<?php echo $_GET['id'] ?>");
+        formData_anular.append('rz_anular', $('#txt_rz_anular').val());
+       
         //var url = "../index.php";
         $.ajax({
             url: "php_anular.php",
             type: "POST",
-            data: {
-                id_remi: id_remi,
-                rz_anular: rz_anular,
-
-            },
+            data: formData_anular,
             success: function(response) {
                 if (response.estado) {
                     toastr.success("Anulo Exitosamente la remision");
