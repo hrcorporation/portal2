@@ -4,11 +4,6 @@
 
 <?php
 
-require '../../librerias/autoload.php';
-require '../../modelos/autoload.php';
-require '../../vendor/autoload.php'; ?>
-<?php
-
 //$t10_vehiculo = new vehiculos_t10();
 $t26_remisiones = new t26_remisiones();
 $php_clases = new php_clases();
@@ -54,32 +49,7 @@ $t26_remisiones->validar_falta_horas_remi_conductor_all();
             </div>
             <div class="card-body">
                 <?php
-
-
-                $id_conductor = (int)$php_clases->HR_Crypt($_SESSION['id_usuario'], 2);
-
-                $t26_remisiones->validar_falta_horas_remi_conductor($id_conductor);
-
-                $estado_conductor = (int)$t1_terceros->conductor_estado($id_conductor);
-
-                if ($estado_conductor == 2) {
-                ?>
-                    <span id="bloquealerta">
-                        <div class="row">
-                            <div class="col">
-                                <div class="alert alert-warning alert-dismissible">
-                                    <h5><i class="icon fas fa-ban"></i> BLOQUEADO!</h5>
-                                    <b>Se desbloqueara hasta completar los campos requeridos de las horas en las respectivas remisiones</b>
-                                </div>
-                            </div>
-                        </div>
-                    </span>
-                <?php
-                }
-                ?>
-
-
-
+                $id_conductor = intval($_SESSION['id_usuario']); ?>
                 <div id="contenido">
                     <table id="t_remisiones" class="display" style="width:100%">
                         <thead>

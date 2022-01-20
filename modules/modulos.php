@@ -159,6 +159,34 @@ if (is_array($array_rol_user =  $login->get_rol_tercero($_SESSION['id_usuario'])
     ?>
 <!--- ============================ FIN MODULO REMIWEBS============================================= -->
 
+<!--- ============================MODULO USUARIOS CLIENTES============================================= -->
+<?php
+    $modulos = array(1, 7, 8, 14, 20, 22, 29); // Array de roles para habilitar roles
+    if ($login->validar_rol_user($modulos, $array_rol_user)) : // Validacion para habilitar el usuario
+    ?>
+<!-- Modulo HTMl -->
+<div class="col-4" id="">
+    <div class="small-box bg-info ">
+        
+        <div class="inner">
+            <!-- Nombre de Modulo -->
+            <h3>Facturacion</H3>
+        </div>
+        <div class="icon">
+            <!-- icono del Modulo -->
+            <i class="fas fa-wallet"></i>
+        </div>
+        <!-- Enlace de redireccionamiento del Modulo  -->
+        <a class="small-box-footer disabled" href="facturae/">
+            Ir <i class="fas fa-arrow-circle-right"></i>
+        </a>
+    </div>
+</div>
+<?php
+    endif; // Fin de la Validacion habilitar modulo
+    ?>
+<!--- ============================ FIN MODULO REMIWEBS============================================= -->
+
 
 <?php
 

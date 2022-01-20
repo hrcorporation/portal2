@@ -122,20 +122,21 @@ while ($fila_obra = $datos_obras->fetch(PDO::FETCH_ASSOC)) {
                         <div class="col-1"></div>
                         <div class="col">
                             <div class="form-group">
-                                <label> <input type="radio" class="form-control tipoarchivo" name="subirtipo" value="image/x-png,image/jpeg" required checked=""> Subir Imagen </label>
+                                <label> <input type="radio" class="form-control tipoarchivo" id="subirpdf" name="subirtipo" value="application/pdf" checked="true"  required > Subir PDF </label>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group">
-                                <label> <input type="radio" class="form-control tipoarchivo" id="subirpdf" name="subirtipo" value="application/pdf" required> Subir PDF </label>
+                                <label> <input type="radio" class="form-control tipoarchivo" name="subirtipo" value="image/x-png,image/jpeg" required> Subir Imagen </label>
                             </div>
                         </div>
+                        
                     </div>
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
                                 <label>Subir Imagen o PDF Seleccione el Archivo</label>
-                                <input type="file" class="form-control" name="imgfactura" id="imgfactura" accept="image/x-png,image/jpeg" required>
+                                <input type="file" class="form-control" name="imgfactura" id="imgfactura" accept="application/pdf" required>
                             </div>
                         </div>
                     </div>

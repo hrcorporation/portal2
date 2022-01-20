@@ -27,7 +27,9 @@ $resultado = "";
 
 if (isset($_POST['valor']) && !empty($_POST['valor']) &&
     isset($_POST['titulo']) && !empty($_POST['titulo']) &&
-    isset($_POST['cliente']) && !empty($_POST['cliente'])
+    isset($_POST['cliente']) && !empty($_POST['cliente']) &&
+    isset($_POST['obra']) && !empty($_POST['obra']) &&
+    isset($_POST['remision']) && !empty($_POST['remision'])
 ){
 
     $php_idcliente = htmlspecialchars($_POST["cliente"]);
@@ -108,6 +110,7 @@ $datos = array(
     'estado' => $php_estado,
     'errores' => $errores,
     'result' => $resultado,
+    'post' => $_POST
 );
 
 

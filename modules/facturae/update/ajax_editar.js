@@ -12,18 +12,14 @@
                 processData: false,
                 success: function (data)
                 {
-                    console.log(data.estado);
-                    console.log("hola");
+                    const datos_errores = Object.values(data.errores);
+                    console.log(datos_errores);
                     if(data.estado){
                         toastr.success('exitoso');
-                        toastr.success(data.errores);
-                        console.log(data.errores);
-                        console.log(data.result);
-                        //console.log($('#habi_img').val());
                     }else{
-                        toastr.warning(data.errores); 
-                        console.log(data.result);              
-                        console.log(data.errores);
+                        for (let index = 0; index < datos_errores.length; index++) {                   
+                            toastr.warning(data.errores[index]);
+                        }              
                     }
                 },
                 error: function (respuesta) {

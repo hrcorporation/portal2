@@ -22,6 +22,80 @@ class t27_factura extends conexionPDO
         $this->con = $this->PDO->connect();
     }
 
+    function editar_valor_fact($id_factura,  $valor)
+    {
+
+        $this->valor = $valor;
+        $this->id_factura = $id_factura;
+
+        $sql = "UPDATE `ct27_facturae` SET  `ct27_valorfact` = :valor  WHERE `ct27_id_factura` = :id_factura";
+        $stmt = $this->con->prepare($sql);
+
+        $stmt->bindParam(':valor', $this->valor, PDO::PARAM_STR);
+        $stmt->bindParam(':id_factura', $this->id_factura, PDO::PARAM_INT);
+
+        if($result = $stmt->execute())
+        {
+            return true;
+        }else{
+            return false;
+        }
+
+        //Cerrar Conexion
+        $this->PDO->closePDO();
+    }
+
+    function editar_num_fact($id_factura,  $num)
+    {
+
+        $this->num = $num;
+
+        $this->id_factura = $id_factura;
+
+        $sql = "UPDATE `ct27_facturae` SET  `ct27_nombre_factura` = :num WHERE `ct27_id_factura` = :id_factura";
+        $stmt = $this->con->prepare($sql);
+
+        $stmt->bindParam(':num', $this->num, PDO::PARAM_STR);
+        $stmt->bindParam(':id_factura', $this->id_factura, PDO::PARAM_INT);
+
+        if($result = $stmt->execute())
+        {
+            return true;
+        }else{
+            return false;
+        }
+
+        //Cerrar Conexion
+        $this->PDO->closePDO();
+    }
+
+    function editar_cli_obra($id_factura,  $id_cliente, $id_obra)
+    {
+
+        $this->id_cliente = $id_cliente;
+        $this->id_obra = $id_obra;
+        $this->id_factura = $id_factura;
+
+        $sql = "UPDATE `ct27_facturae` SET  `ct27_id_cliente` = :id_cliente , `ct27_id_obra` = :id_obra WHERE `ct27_id_factura` = :id_factura";
+        $stmt = $this->con->prepare($sql);
+
+        $stmt->bindParam(':id_cliente', $this->id_cliente, PDO::PARAM_STR);
+        $stmt->bindParam(':id_obra', $this->id_obra, PDO::PARAM_INT);
+        $stmt->bindParam(':id_factura', $this->id_factura, PDO::PARAM_INT);
+
+        if($result = $stmt->execute())
+        {
+            return true;
+        }else{
+            return false;
+        }
+
+        //Cerrar Conexion
+        $this->PDO->closePDO();
+    }
+
+
+
 
     function selectfactura_remi()
     {
@@ -263,16 +337,31 @@ class t27_factura extends conexionPDO
 
     function select_factura()
     {
-        $sql = "SELECT * FROM `ct27_facturae` ORDER BY `ct27_facturae`.`ct27_id_factura` DESC LIMIT 3000";
+        $sql = "SELECT ct27_id_factura, ct27_nombre_factura,ct27_fecha_subda, ct27_id_cliente, ct1_terceros.ct1_RazonSocial, ct27_id_obra, ct5_obras.ct5_NombreObra, ct27_valorfact FROM ct27_facturae INNER JOIN ct1_terceros ON ct27_facturae.ct27_id_cliente = ct1_terceros.ct1_IdTerceros INNER JOIN ct5_obras ON ct27_id_obra = ct5_obras.ct5_IdObras ORDER BY `ct27_facturae`.`ct27_id_factura` DESC LIMIT 1000";
         //Preparar Conexion
         $stmt = $this->con->prepare($sql);
 
-        // Asignando Datos ARRAY => SQL
-        //$stmt->bindParam(':id_remision', $this->id, PDO::PARAM_INT);
-
-        // Ejecutar 
-        $result = $stmt->execute();
-
+        if ($result = $stmt->execute()) {
+            $num_reg =  $stmt->rowCount();
+            if ($num_reg > 0) {
+                while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) { // Obtener los datos de los valores
+                    $datos['id'] = $fila['ct27_id_factura'];
+                    $datos['num_fact'] = $fila['ct27_nombre_factura'];
+                    $datos['fecha_subida'] = $fila['ct27_fecha_subda'];
+                    $datos['id_cliente'] = $fila['ct27_id_cliente'];
+                    $datos['nombre_cliente'] = $fila['ct1_RazonSocial'];
+                    $datos['id_obra'] = $fila['ct27_id_obra'];
+                    $datos['nombre_obra'] = $fila['ct5_NombreObra'];
+                    $datos['valor_fact'] = "$ ".  number_format($fila['ct27_valorfact'], 2, ',', '.') ;
+                    $datosf[] = $datos;
+                }
+                return $datosf;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
         //Cerrar Conexionid_remision
         return $stmt;
     }
