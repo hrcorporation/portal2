@@ -6,7 +6,7 @@ if (is_array($array_rol_user =  $login->get_rol_tercero($_SESSION['id_usuario'])
 ?>
 <!--- ============================MODULO BATCHES============================================= -->
 <?php
-    $modulos = array(1, 7, 8, 14, 20, 22, 29); // Array de roles para habilitar roles
+    $modulos = array(1); // Array de roles para habilitar roles
     if ($login->validar_rol_user($modulos, $array_rol_user)) : // Validacion para habilitar el usuario
     ?>
 <!-- Modulo HTMl -->
@@ -32,7 +32,7 @@ if (is_array($array_rol_user =  $login->get_rol_tercero($_SESSION['id_usuario'])
 <!--- ============================ FIN MODULO BATCHES============================================= -->
 <!--- ============================MODULO EMPLEADOS============================================= -->
 <?php
-    $modulos = array(1, 7, 8, 14, 20, 22, 29); // Array de roles para habilitar roles
+    $modulos = array(1); // Array de roles para habilitar roles
     if ($login->validar_rol_user($modulos, $array_rol_user)) : // Validacion para habilitar el usuario
     ?>
 <!-- Modulo HTMl -->
@@ -64,7 +64,7 @@ if (is_array($array_rol_user =  $login->get_rol_tercero($_SESSION['id_usuario'])
 
 <!--- ============================MODULO REMIIISIONES============================================= -->
 <?php
-    $modulos = array(1, 7, 8, 14, 20, 22, 29); // Array de roles para habilitar roles
+    $modulos = array(1, 26); // Array de roles para habilitar roles
     if ($login->validar_rol_user($modulos, $array_rol_user)) : // Validacion para habilitar el usuario
     ?>
 <!-- Modulo HTMl -->
@@ -97,7 +97,7 @@ if (is_array($array_rol_user =  $login->get_rol_tercero($_SESSION['id_usuario'])
 
 <!--- ============================MODULO REMIWEB============================================= -->
 <?php
-    $modulos = array(1, 7, 8, 14, 20, 22, 29); // Array de roles para habilitar roles
+    $modulos = array(1,26); // Array de roles para habilitar roles
     if ($login->validar_rol_user($modulos, $array_rol_user)) : // Validacion para habilitar el usuario
     ?>
 <!-- Modulo HTMl -->
@@ -129,7 +129,7 @@ if (is_array($array_rol_user =  $login->get_rol_tercero($_SESSION['id_usuario'])
 
 <!--- ============================MODULO USUARIOS CLIENTES============================================= -->
 <?php
-    $modulos = array(1, 7, 8, 14, 20, 22, 29); // Array de roles para habilitar roles
+    $modulos = array(1); // Array de roles para habilitar roles
     if ($login->validar_rol_user($modulos, $array_rol_user)) : // Validacion para habilitar el usuario
     ?>
 <!-- Modulo HTMl -->
@@ -161,7 +161,7 @@ if (is_array($array_rol_user =  $login->get_rol_tercero($_SESSION['id_usuario'])
 
 <!--- ============================MODULO USUARIOS CLIENTES============================================= -->
 <?php
-    $modulos = array(1, 7, 8, 14, 20, 22, 29); // Array de roles para habilitar roles
+    $modulos = array(1,26); // Array de roles para habilitar roles
     if ($login->validar_rol_user($modulos, $array_rol_user)) : // Validacion para habilitar el usuario
     ?>
 <!-- Modulo HTMl -->

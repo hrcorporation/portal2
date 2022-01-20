@@ -34,7 +34,7 @@
          */
         if (is_array($array_rol_user =  $login->get_rol_tercero($_SESSION['id_usuario']))) :
 
-            $modulos = array(1,19,26,20,22,27); // Array de roles para habilitar roles
+            $modulos = array(1,19,20,22,26,27); // Array de roles para habilitar roles
             if ($login->validar_rol_user($modulos, $array_rol_user)) : // Validacion para habilitar el usuario
                 $php_clases = new php_clases();
                 $t27_factura = new t27_factura();

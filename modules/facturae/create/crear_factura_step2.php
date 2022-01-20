@@ -5,9 +5,7 @@
 
 <?php
 require '../../../librerias/autoload.php';
-require '../../../modelos/autoload.php';
-require '../../../vendor/autoload.php';
-require '../../../include/LibreriasHR.php';
+
 
 $LibreriasHR = new LibreriasHR();
 $t5_obras = new t5_obras();

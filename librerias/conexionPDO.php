@@ -1,6 +1,6 @@
 <?php 
 
-require 'config.php';
+require 'config-portal.php';
 
 class conexionPDO{
 
