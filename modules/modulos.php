@@ -84,7 +84,7 @@ if (is_array($array_rol_user =  $login->get_rol_tercero($_SESSION['id_usuario'])
             <i class="fas fa-wallet"></i>
         </div>
         <!-- Enlace de redireccionamiento del Modulo  -->
-        <a class="small-box-footer disabled" href="Remisiones/">
+        <a class="small-box-footer disabled" href="remisiones/">
             Ir <i class="fas fa-arrow-circle-right"></i>
         </a>
     </div>
