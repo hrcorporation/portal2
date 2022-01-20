@@ -535,7 +535,7 @@ if($login->validar_rol_user([1, 20, 22,26], $array_rol_user)){
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label>Escriba la Razon de anular la remision por favor</label>
+                                <label>Escriba la Razon de anular la remision </label>
                                 <input type="text" name="txt_rz_anular" id="txt_rz_anular" class="form-control"
                                     required>
                             </div>
@@ -560,7 +560,7 @@ if($login->validar_rol_user([1, 20, 22,26], $array_rol_user)){
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label>Escriba la Razon de eliminar la remision</label>
+                                <label>Escriba la Razon de eliminar la remision por favor</label>
                                 <input type="text" name="txt_rz_eliminar" id="txt_rz_eliminar" class="form-control"
                                     required>
                             </div>
@@ -673,18 +673,15 @@ $(document).ready(function() {
     });
 
     $("#btn-anular").click(function() {
-        alert($('#txt_rz_anular').val());
-        let formData_anular = new FormData();
-
-        formData_anular.append('key2', 'value2');
-        formData_anular.append('id_remi', "<?php echo $_GET['id'] ?>");
-        formData_anular.append('rz_anular', $('#txt_rz_anular').val());
-       
+            
         //var url = "../index.php";
         $.ajax({
             url: "php_anular.php",
             type: "POST",
-            data: formData_anular,
+            data: {
+                'id_remi' :<?php echo $_GET['id'] ?>,
+                'rz_anular' : $('#txt_rz_anular').val()
+            },
             success: function(response) {
                 if (response.estado) {
                     toastr.success("Anulo Exitosamente la remision");

@@ -1,33 +1,6 @@
 <?php include '../../layout/validar_session2.php' ?>
 <?php include '../../layout/head/head2.php'; ?>
 <?php include 'sidebar.php' ?>
-<?php 
-require '../../librerias/autoload.php';
-require '../../modelos/autoload.php';
-require '../../vendor/autoload.php';
-?>
-
-
-<?php
-$php_clases = new php_clases();
-$t26_remisiones = new t26_remisiones();
-
-
-switch (intval($_SESSION['rol_funcionario'])) {
-    case 1:
-    case 8:
-    case 29:
-    case 20:
-    case 22:
-        $t29_batch = new t29_batch();
-        $php_clases = new php_clases();
-        break;
-    default:
-        print('<script> console.log("mal")</script>');
-
-        break;
-}
-?>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -53,6 +26,22 @@ switch (intval($_SESSION['rol_funcionario'])) {
     <!-- Main content -->
     <section class="content">
 
+        <?php
+        /**
+         * Validacion de Usuario
+         */
+        if (is_array($array_rol_user =  $login->get_rol_tercero($_SESSION['id_usuario']))) :
+
+            $modulos = array(1,8,20,22,29); // Array de roles para habilitar roles
+            if ($login->validar_rol_user($modulos, $array_rol_user)) : // Validacion para habilitar el usuario
+                $t29_batch = new t29_batch();
+                $php_clases = new php_clases();
+                $php_clases = new php_clases();
+                $t26_remisiones = new t26_remisiones();
+                /**
+                 * Card Body
+                 */
+        ?>
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
@@ -66,9 +55,9 @@ switch (intval($_SESSION['rol_funcionario'])) {
                 </div>
             </div>
             <div class="card-body">
-                
-              
-            
+
+
+
 
                 <div id="contenido">
 
@@ -106,7 +95,19 @@ switch (intval($_SESSION['rol_funcionario'])) {
             <!-- /.card-footer-->
         </div>
         <!-- /.card -->
-   
+        <?php
+            else :
+            ?>
+        <div class="callout callout-warning">
+            <h5>No posee permisos en este modulo</h5>
+        </div>
+        <?php
+            endif;
+        else :
+            header('location : ../../cerrar.php');
+        endif;
+
+        ?>
 
     </section>
     <!-- /.content -->

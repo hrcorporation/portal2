@@ -382,9 +382,9 @@ if($login->validar_rol_user([1], $array_rol_user)){
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <label>Escriba la Razon de anular la remision</label>
+                                <label>Escriba la Razon de anular la remision </label>
                                 <input type="text" name="txt_rz_anular" id="txt_rz_anular" class="form-control"
-                                    required>
+                                    required="true">
                             </div>
                         </div>
                         <div class="modal-footer justify-content-between">
@@ -568,16 +568,13 @@ $(document).ready(function() {
     });
     $("#btn-anular").click(function() {
 
-        var id_remi = "<?php echo $_GET['id'] ?>";
-        var rz_anular = $('#C_IdTerceros').val();
-        //var url = "../index.php";
+      
         $.ajax({
             url: "php_anular.php",
             type: "POST",
             data: {
-                id_remi: id_remi,
-                rz_anular: rz_anular,
-
+                'id_remi' :<?php echo $_GET['id'] ?>,
+                'rz_anular' : $('#txt_rz_anular').val()
             },
             success: function(response) {
                 if (response.estado) {

@@ -2,12 +2,6 @@
 <?php include '../../layout/head/head2.php'; ?>
 <?php include 'sidebar.php' ?>
 
-<?php require '../../librerias/autoload.php';
-require '../../modelos/autoload.php';
-require '../../vendor/autoload.php'; ?>
-
-
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->

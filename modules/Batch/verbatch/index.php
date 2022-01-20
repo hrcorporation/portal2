@@ -4,59 +4,11 @@
 <?php //include '../../include/lib.php'; 
 ?>
 <script>
-    $("#resultado").hide();
-    //$("#bloque-boton1").hide();
-    $("#bloque-boton2").hide();
+$("#resultado").hide();
+//$("#bloque-boton1").hide();
+$("#bloque-boton2").hide();
 </script>
 
-<?php require '../../../librerias/autoload.php';
-require '../../../modelos/autoload.php';
-require '../../../vendor/autoload.php';
-?>
-
-
-<?php
-$php_clases = new php_clases();
-$t26_remisiones = new t26_remisiones();
-
-$id_conductor = (int)$php_clases->HR_Crypt($_SESSION['id_usuario'], 2);
-
-
-$t26_remisiones->validar_falta_horas_remi_conductor($id_conductor);
-
-switch ($rol_user) {
-    case 1:
-    case 8:
-    case 29:
-    case 20:
-    case 22:
-
-    case '1':
-
-
-        $t29_batch = new t29_batch();
-        $php_clases = new php_clases();
-        $t5_obras = new t5_obras();
-        $t1_terceros = new t1_terceros();
-        $t26_remisiones = new t26_remisiones();
-        // $lib = new lib();
-
-        if (isset($_GET['id'])) {
-            $id_batch = $_GET['id'];
-        }
-
-        include 'datos_batch.php';
-
-
-        break;
-
-    default:
-        //print('<script> window.location = "../../../cerrar.php"</script>');
-
-        var_dump($rol_user);
-        break;
-}
-?>
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -81,7 +33,30 @@ switch ($rol_user) {
 
     <!-- Main content -->
     <section class="content">
+        <?php
+        /**
+         * Validacion de Usuario
+         */
+        if (is_array($array_rol_user =  $login->get_rol_tercero($_SESSION['id_usuario']))) :
 
+            $modulos = array(1,8,20,22,29); // Array de roles para habilitar roles
+            if ($login->validar_rol_user($modulos, $array_rol_user)) : // Validacion para habilitar el usuario
+                $t29_batch = new t29_batch();
+                $php_clases = new php_clases();
+                $t5_obras = new t5_obras();
+                $t1_terceros = new t1_terceros();
+                $t26_remisiones = new t26_remisiones();
+
+                if (isset($_GET['id'])) {
+                    $id_batch = intval($_GET['id']);
+                }
+
+                include 'datos_batch.php';
+
+                /**
+                 * Card Body
+                 */
+        ?>
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
@@ -89,9 +64,11 @@ switch ($rol_user) {
                         <strong><?php echo $remision_batch; ?> </strong>
                     </span></h3>
                 <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
+                        title="Collapse">
                         <i class="fas fa-minus"></i></button>
-                    <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
+                    <button type="button" class="btn btn-tool" data-card-widget="maximize"><i
+                            class="fas fa-expand"></i></button>
                 </div>
             </div>
 
@@ -141,19 +118,22 @@ switch ($rol_user) {
                                                     foreach ($datos_batch as $datos) {
                                                         $planta = $datos['ct29_IdPlanta'];
                                                     ?>
-                                                        <tr>
-                                                            <td><input type="checkbox" name="id_batch[]" value="<?php echo $datos['ct29_Id'] ?>"> </td>
-                                                            <td><?php echo $php_clases->estado_batch($datos['ct29_estado']); ?> </td>
-                                                            <td><?php echo $datos['ct29_Fecha']; ?></td>
-                                                            <td><?php echo $datos['ct29_Hora']; ?></td>
-                                                            <td><?php echo $datos['ct29_IdCliente']; ?></td>
-                                                            <td><?php echo $datos['ct29_IdObra']; ?></td>
-                                                            <td><?php echo $datos['ct29_MetrosCubicos']; ?></td>
-                                                            <td><?php echo $datos['ct29_NombreFormula'] . " - " . $datos['ct29_DescripcionFormula']; ?></td>
-                                                            <td><?php echo $datos['ct29_Asentamiento']; ?></td>
-                                                            <td><?php echo $datos['ct29_IdMixer']; ?></td>
-                                                            <td><?php echo $datos['ct29_MixerDriver']; ?></td>
-                                                        </tr>
+                                                    <tr>
+                                                        <td><input type="checkbox" name="id_batch[]"
+                                                                value="<?php echo $datos['ct29_Id'] ?>"> </td>
+                                                        <td><?php echo $php_clases->estado_batch($datos['ct29_estado']); ?>
+                                                        </td>
+                                                        <td><?php echo $datos['ct29_Fecha']; ?></td>
+                                                        <td><?php echo $datos['ct29_Hora']; ?></td>
+                                                        <td><?php echo $datos['ct29_IdCliente']; ?></td>
+                                                        <td><?php echo $datos['ct29_IdObra']; ?></td>
+                                                        <td><?php echo $datos['ct29_MetrosCubicos']; ?></td>
+                                                        <td><?php echo $datos['ct29_NombreFormula'] . " - " . $datos['ct29_DescripcionFormula']; ?>
+                                                        </td>
+                                                        <td><?php echo $datos['ct29_Asentamiento']; ?></td>
+                                                        <td><?php echo $datos['ct29_IdMixer']; ?></td>
+                                                        <td><?php echo $datos['ct29_MixerDriver']; ?></td>
+                                                    </tr>
                                                     <?php
                                                     }
                                                     ?>
@@ -191,7 +171,9 @@ switch ($rol_user) {
                 <div class="row">
                     <div class="col-md-2">
                         <div class="form-group">
-                            <a href="../ver_remision/remision.php?id=<?php echo $php_clases->HR_Crypt($remision_batch, 1);  ?>" class="btn btn-block btn-info" target="_blank"> <i class="fas fa-eye"></i> Vista Previa</a>
+                            <a href="../ver_remision/remision.php?id=<?php echo $php_clases->HR_Crypt($remision_batch, 1);  ?>"
+                                class="btn btn-block btn-info" target="_blank"> <i class="fas fa-eye"></i> Vista
+                                Previa</a>
                         </div>
 
                     </div>
@@ -201,21 +183,25 @@ switch ($rol_user) {
                     if ($id_remision) :
                     ?>
 
-                        <div class="col-3">
-                            <div class="form-group">
-                                <a class="btn btn-block btn-success" href="../../remisiones/generar_remi/generate.php?id=<?php echo $php_clases->HR_Crypt($id_remision, 1)   ?>"><i class="fas fa-hand-point-right"></i> Siguiente</a>
-                            </div>
+                    <div class="col-3">
+                        <div class="form-group">
+                            <a class="btn btn-block btn-success"
+                                href="../../remisiones/generar_remi/generate.php?id=<?php echo $php_clases->HR_Crypt($id_remision, 1)   ?>"><i
+                                    class="fas fa-hand-point-right"></i> Siguiente</a>
                         </div>
+                    </div>
 
                     <?php else : ?>
-                        <div class="col-3">
-                            <form name="form_generar" id="form_generar" method="POST">
-                                <div class="form-group">
-                                    <input type="hidden" name="txt_remision_batch" id="txt_remision_batch" value="<?php echo $php_clases->HR_Crypt($remision_batch, 1); ?>">
-                                    <button type="submit" id="generar" class="btn btn-block btn-success">Guardar y Generar Remision</button>
-                                </div>
-                            </form>
-                        </div>
+                    <div class="col-3">
+                        <form name="form_generar" id="form_generar" method="POST">
+                            <div class="form-group">
+                                <input type="hidden" name="txt_remision_batch" id="txt_remision_batch"
+                                    value="<?php echo $php_clases->HR_Crypt($remision_batch, 1); ?>">
+                                <button type="submit" id="generar" class="btn btn-block btn-success">Guardar y Generar
+                                    Remision</button>
+                            </div>
+                        </form>
+                    </div>
                     <?php endif ?>
 
                 </div>
@@ -223,7 +209,8 @@ switch ($rol_user) {
                     <div class="col">
                         <div class="form-group">
                             <!-- Large modal -->
-                            <button type="button" class="btn btn-default " data-toggle="modal" data-target="#modal-xl" disabled="disabled">
+                            <button type="button" class="btn btn-default " data-toggle="modal" data-target="#modal-xl"
+                                disabled="disabled">
                                 <font style="vertical-align: inherit;">
                                     <font style="vertical-align: inherit;">
                                         Vista Preliminar de la Remision
@@ -246,7 +233,8 @@ switch ($rol_user) {
 
                                                     <div class="col-md-3">
                                                         <!-- Logo -->
-                                                        <img src="../ver_remision/Logo.jpeg" class="img-thumbnail" width="90" height="100">
+                                                        <img src="../ver_remision/Logo.jpeg" class="img-thumbnail"
+                                                            width="90" height="100">
                                                     </div>
 
                                                     <div class="col-md-6 " style="justify-content: center;">
@@ -265,7 +253,8 @@ switch ($rol_user) {
 
                                                             <div class="col-md-12" align="center">
                                                                 <h6>Avda. Mirolindo No. 77-56 </h6>
-                                                                <h6>Tel:268 50 61 - Cels: 317 368 66 41 - 314 230 45 93 </h6>
+                                                                <h6>Tel:268 50 61 - Cels: 317 368 66 41 - 314 230 45 93
+                                                                </h6>
                                                                 <h6>concretolima@gmail.com Ibague - Tolima </h6>
                                                             </div>
 
@@ -294,7 +283,8 @@ switch ($rol_user) {
                                                     <div class="col">
                                                         <div class="row">
                                                             <div class="col-md-1 col-sm-1 ">Fecha: </div>
-                                                            <div class="col-md-5 col-sm-4"> viernes, 23 Octubre del 2020</div>
+                                                            <div class="col-md-5 col-sm-4"> viernes, 23 Octubre del 2020
+                                                            </div>
                                                             <div class="col-md-1 col-sm-2">Hora: </div>
                                                             <div class="col-md-5 col-sm-2"> 00 : 00 </div>
                                                         </div>
@@ -423,7 +413,8 @@ switch ($rol_user) {
                                             </div>
                                         </div>
                                         <div class="modal-footer justify-content-between">
-                                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-default"
+                                                data-dismiss="modal">Close</button>
                                             <button type="button" class="btn btn-primary">Save changes</button>
                                         </div>
                                     </div>
@@ -447,6 +438,20 @@ switch ($rol_user) {
             <!-- /.card-footer-->
         </div>
         <!-- /.card -->
+        <?php
+            else :
+            ?>
+        <div class="callout callout-warning">
+            <h5>No posee permisos en este modulo</h5>
+        </div>
+        <?php
+            endif;
+        else :
+            header('location : ../../cerrar.php');
+        endif;
+
+        ?>
+
 
     </section>
     <!-- /.content -->
@@ -457,15 +462,14 @@ switch ($rol_user) {
 <script src="ajax_crear.js"></script>
 <script src="ajax_anular.js"></script>
 <script>
-    $(function() {
-        $(document).on('click', '[data-toggle="lightbox"]', function(event) {
-            event.preventDefault();
-            $(this).ekkoLightbox({
-                alwaysShowClose: true
-            });
+$(function() {
+    $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+        event.preventDefault();
+        $(this).ekkoLightbox({
+            alwaysShowClose: true
         });
     });
-
+});
 </script>
 
 </body>

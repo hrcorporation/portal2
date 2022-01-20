@@ -2,9 +2,7 @@
 <?php include '../../../layout/head/head3.php'; ?>
 <?php include 'sidebar.php' ?>
 
-<?php require '../../../librerias/autoload.php';
-require '../../../modelos/autoload.php';
-require '../../../vendor/autoload.php'; ?>
+
 
 <?php
 
@@ -18,8 +16,7 @@ $t4_productos = new t4_productos();
 
 $id_remision  = $php_clases->HR_Crypt($_GET['id'], 2);
 
-$array_roles = array(1);
-$permisos = $php_clases->permisos($rol_user, $array_roles);
+
 
 $datos_remision = $t26_remisiones->get_remi_id($id_remision);
 
