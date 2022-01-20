@@ -11,7 +11,7 @@ $PDO = new conexionPDO();
 $con = $PDO->connect();
 $data_tables = new data_tables();
 
-
+$id_tercero = intval($_POST['id_usuario']);
 $data = $data_tables::dt_cliente_obra_for_user($con,$id_tercero);
 
 

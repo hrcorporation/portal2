@@ -768,7 +768,7 @@ class t1_terceros extends conexionPDO
 
     function select_user_cliente2()
     {
-        $sql = "SELECT ct1_IdTerceros,ct1_NumeroIdentificacion,ct1_Nombre1,ct1_Apellido1,ct1_id_cliente1,ct1_RazonSocial,ct1_usuario FROM ct1_terceros WHERE ct1_TipoTercero = 3 ORDER BY `ct1_terceros`.`ct1_IdTerceros` DESC";
+        $sql = "SELECT ct1_IdTerceros,ct1_NumeroIdentificacion,ct1_Nombre1,ct1_Apellido1 FROM ct1_terceros WHERE ct1_TipoTercero = 3 ORDER BY `ct1_terceros`.`ct1_IdTerceros` DESC";
         //Preparar Conexion
         $stmt = $this->con->prepare($sql);
 
@@ -779,9 +779,13 @@ class t1_terceros extends conexionPDO
             $num_reg =  $stmt->rowCount(); // Get Numero de Registros
             if ($num_reg > 0) { // Validar el numero de Registros
                 while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) { // Obtener los datos de los valores
-                    $datos[] = $fila;
+                    $datos['id'] = $fila['ct1_IdTerceros'];
+                    $datos['num_identificacion'] = $fila['ct1_NumeroIdentificacion'];
+                    $datos['nombres'] = $fila['ct1_Nombre1'];
+                    $datos['apellidos'] = $fila['ct1_Apellido1'];
+                    $datosf[] = $datos;
                 }
-                return $datos;
+                return $datosf;
             } else {
                 return false;
             }
@@ -818,6 +822,46 @@ class t1_terceros extends conexionPDO
 
         //resultado
         //return $stmt;
+    }
+
+
+
+    function add_cliente_obra($id_usuario,$id_cliente, $id_obra){
+        
+        
+        $sql ="INSERT INTO `tercero_has_obra`( `id_tercero`, `id_cliente`, `id_obra`) VALUES (:id_usuario,:id_cliente, :id_obra)";
+        //Preparar Conexion
+        $stmt = $this->con->prepare($sql);
+
+        $stmt->bindParam(':id_usuario', $id_usuario, PDO::PARAM_INT);
+        $stmt->bindParam(':id_cliente', $id_cliente, PDO::PARAM_INT);
+        $stmt->bindParam(':id_obra', $id_obra, PDO::PARAM_INT);
+
+        if ($result = $stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    function eliminar_cliente_obra($id)
+    {
+
+        $this->id = $id;
+
+        $sql = "DELETE FROM `tercero_has_obra` WHERE `tercero_has_obra`.`id` = :id_usuario";
+
+        //Preparar Conexion
+        $stmt = $this->con->prepare($sql);
+
+        $stmt->bindParam(':id_usuario', $this->id, PDO::PARAM_INT);
+
+        if ($result = $stmt->execute()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     function eliminar_usuario($id)
