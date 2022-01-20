@@ -1,9 +1,8 @@
 <?php include '../../../layout/validar_session3.php' ?>
+<?php include '../../../layout/head/head3.php'; ?>
+<?php include 'sidebar.php' ?>
 
-<?php
-require '../../../librerias/autoload.php';
-require '../../../modelos/autoload.php';
-require '../../../vendor/autoload.php'; ?>
+
 
 <?php require 'modelo_t26.php'; ?>
 
@@ -13,10 +12,10 @@ $php_clases = new php_clases();
 $modelo_t26 = new modelo_t26();
 
 
-$id = $php_clases->HR_Crypt($_GET['id'], 2);
-$nombre_obra = $php_clases->HR_Crypt($_GET['ob'], 2);
+$id = $_GET['id'];
+$nombre_obra = $_GET['ob'];
 
-$id_conductor = (int)$php_clases->HR_Crypt($_SESSION['id_usuario'], 2);
+$id_conductor = (int)$_SESSION['id_usuario'];
 
 
 $t26_remisiones->validar_falta_horas_remi_conductor($id_conductor);
@@ -79,8 +78,7 @@ while ($fila = $result->fetch(PDO::FETCH_ASSOC)) {
     //$notificacion = 6;
 }
 ?>
-<?php include '../../../layout/head/head3.php'; ?>
-<?php include 'sidebar.php' ?>
+
 
 
 <!-- Content Wrapper. Contains page content -->

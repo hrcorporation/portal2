@@ -1661,7 +1661,7 @@ $sql = "SELECT ct26_id_remision, ct26_imagen_remi, ct26_codigo_remi, ct26_razon_
   function get_datos_for_admin()
   {
 
-    $sql = "SELECT * FROM `ct26_remisiones` WHERE ct26_estado  BETWEEN 2 AND 3 ORDER BY `ct26_remisiones`.`ct26_id_remision` DESC LIMIT 1500";
+    $sql = "SELECT ct26_id_remision,ct26_fecha_remi,ct26_nombre_obra,ct26_codigo_remi,ct26_estado FROM `ct26_remisiones` WHERE ct26_estado  BETWEEN 2 AND 3 ORDER BY `ct26_remisiones`.`ct26_id_remision` DESC LIMIT 1500";
     //Preparar Conexion
     $stmt = $this->con->prepare($sql);
 
@@ -1672,9 +1672,38 @@ $sql = "SELECT ct26_id_remision, ct26_imagen_remi, ct26_codigo_remi, ct26_razon_
       $num_reg =  $stmt->rowCount();
       if ($num_reg > 0) {
         while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) { // Obtener los datos de los valores
-          $datos[] = $fila;
+          $datos['id'] = $fila['ct26_id_remision'];
+          $date = new DateTime($fila['ct26_fecha_remi']);
+          $datef = $date->format("d-m-Y");
+          $datos['fecha'] = $datef;
+          $datos['nombre_obra'] = $fila['ct26_nombre_obra'];
+          $datos['cod_remision'] = $fila['ct26_codigo_remi'];
+
+          switch (intval($fila['ct26_estado'])){            
+            case 1:
+                $state = '<small class="badge badge-success"> Facturada </small>';
+                break;
+            case 2:
+                $state = '<small class="badge badge-info"> Pendiente de Facturacion </small>';
+                break;
+
+            case 3:
+                $state = '<small class="badge badge-warning"> Faltan Firma cliente </small>';
+                break;
+
+            case 4:
+                $state = '<small class="badge badge-warning"> Falta Sincronizacion de datos </small>';
+                break;
+
+            default:
+                $state = '<small class="badge badge-info">  </small>';
+                break;
         }
-        return $datos;
+
+          $datos['estado'] = $state;
+          $datosf[] = $datos;
+        }
+        return $datosf;
       } else {
         return false;
       }

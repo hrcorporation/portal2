@@ -2,15 +2,7 @@
 <?php include '../../layout/head/head2.php'; ?>
 <?php include 'sidebar.php' ?>
 
-<?php
 
-//$t10_vehiculo = new vehiculos_t10();
-$t26_remisiones = new t26_remisiones();
-$php_clases = new php_clases();
-$t1_terceros = new t1_terceros();
-
-$t26_remisiones->validar_falta_horas_remi_conductor_all();
-?>
 
 
 <!-- Content Wrapper. Contains page content -->
@@ -36,15 +28,31 @@ $t26_remisiones->validar_falta_horas_remi_conductor_all();
 
     <!-- Main content -->
     <section class="content">
-
+        <?php
+        /**
+         * Validacion de Usuario
+         */
+        if (is_array($array_rol_user =  $login->get_rol_tercero($_SESSION['id_usuario']))) :
+          
+            $modulos = array(1,8,9,10,11,15,16,19,20,22,26,27,29); // Array de roles para habilitar roles
+            if ($login->validar_rol_user($modulos, $array_rol_user)) : // Validacion para habilitar el usuario
+                $t26_remisiones = new t26_remisiones();
+                $php_clases = new php_clases();
+                $t1_terceros = new t1_terceros();
+                /**
+                 * Card Body
+                 */
+        ?>
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title"></h3>
                 <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
+                        title="Collapse">
                         <i class="fas fa-minus"></i></button>
-                    <button type="button" class="btn btn-tool" data-card-widget="maximize"><i class="fas fa-expand"></i></button>
+                    <button type="button" class="btn btn-tool" data-card-widget="maximize"><i
+                            class="fas fa-expand"></i></button>
                 </div>
             </div>
             <div class="card-body">
@@ -64,90 +72,7 @@ $t26_remisiones->validar_falta_horas_remi_conductor_all();
                         </thead>
                         <tbody>
 
-                            <?php
-                            switch ($_SESSION['rol_funcionario']) {
-
-                                case 1:
-                                case 8:
-                                case 9:
-                                case 10:
-                                case 11:
-                                case 15:
-                                case 16:
-                                case 19:
-                                case 20:
-                                case 22:
-                                case 26:
-                                case 27:
-                                case 29:
-
-
-                                    $result = $t26_remisiones->get_datos_for_admin();
-                                    break;
-                                case 25:
-
-                                    $result = $t26_remisiones->get_datos_for_conductor($php_clases->HR_Crypt($_SESSION['id_usuario'], 2));
-
-
-
-                                    break;
-                                default:
-                                    break;
-                            }
-
-                            //$row = $result->fetch(PDO::FETCH_ASSOC);
-                            $n = 1;
-                            foreach ($result as $fila) {
-
-
-                                if ($fila) {
-                                    $id = $fila['ct26_id_remision'];
-                                    $date = new DateTime($fila['ct26_fecha_remi']);
-                                    $datef = $date->format("d-m-Y");
-                            ?>
-                                    <tr>
-                                        <td> <?php echo $n++ ?> </td>
-
-                                        <td>
-                                            <?php echo $datef; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $fila['ct26_nombre_obra']; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $fila['ct26_codigo_remi'];  ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $php_clases->estado_remi($fila['ct26_estado']); ?>
-                                        </td>
-                                        <td>
-                                            <?php
-                                            if ($_SESSION['rol_funcionario'] == 9 || $_SESSION['rol_funcionario'] == 10 || $_SESSION['rol_funcionario'] == 11) {
-                                            } else {
-                                            ?>
-                                                <a class="btn btn-block btn-success" href="llenar/detalle_remision.php?id='<?php echo $php_clases->HR_Crypt($id, 1) ?>'&ob='<?php echo $php_clases->HR_Crypt($fila['ct26_nombre_obra'], 1) ?>' "> <i class="fas fa-edit"></i> Editar remision </a>
-                                            <?php
-                                            }
-                                            ?>
-                                            <a target="_blank" class="btn btn-block btn-info" href="llenar/ver_remision/remision.php?id='<?php echo $php_clases->HR_Crypt($id, 1) ?>'  "> <i class="fas fa-eye"></i> ver </a>
-                                        </td>
-
-                                    </tr>
-                                <?php
-                                } else {
-                                ?>
-                                    <tr>
-                                        <td Colspan="5">
-                                            Sin datos
-                                        </td>
-                                    </tr>
-                            <?php
-                                }
-                            }
-                            ?>
-
-
-
+                          
 
                         </tbody>
                         <tfoot>
@@ -171,7 +96,19 @@ $t26_remisiones->validar_falta_horas_remi_conductor_all();
             <!-- /.card-footer-->
         </div>
         <!-- /.card -->
+        <?php
+            else :
+            ?>
+        <div class="callout callout-warning">
+            <h5>No posee permisos en este modulo</h5>
+        </div>
+        <?php
+            endif;
+        else :
+            header('location : ../../cerrar.php');
+        endif;
 
+        ?>
     </section>
     <!-- /.content -->
 </div>
@@ -180,9 +117,68 @@ $t26_remisiones->validar_falta_horas_remi_conductor_all();
 <?php include '../../layout/footer/footer2.php' ?>
 
 <script>
-    $(document).ready(function() {
-        $('#t_remisiones').DataTable({});
+$(document).ready(function() {
+
+    var n = 1;
+    var table = $('#t_remisiones').DataTable({
+        //"processing": true,
+        //"scrollX": true,
+        "ajax": {
+            "url": "data_table.php",
+            "dataSrc": ""
+        },
+        "order": [
+            [0, 'desc']
+        ],
+        "columns": [{
+                "data": "id"
+            },
+            {
+                "data": "fecha"
+            },
+            {
+                "data": "nombre_obra"
+            },
+            {
+                "data": "cod_remision"
+            },
+            {
+                "data": "estado"
+            },
+
+            {
+                "data": null,
+                "defaultContent": "<button class='btn btn-warning btn-sm editar'> <i class='fas fa-edit'></i> </button> <button class='btn btn-info btn-sm ver'> <i class='fas fa-eye'></i> </button>"
+            }
+        ],
+        //"scrollX": true,
+
     });
+    table.on('order.dt search.dt', function() {
+        table.column(0, {
+            search: 'applied',
+            order: 'applied'
+        }).nodes().each(function(cell, i) {
+            cell.innerHTML = i + 1;
+        });
+    }).draw();
+    $('#t_remisiones tbody').on('click', 'button.editar', function() {
+        var data = table.row($(this).parents('tr')).data();
+        var id = data['id'];
+        var ob = data['nombre_obra'];
+        
+        window.location = "llenar/detalle_remision.php?id=" + id+'&ob='+ob ;
+    });
+    $('#t_remisiones tbody').on('click', 'button.ver', function() {
+        var data = table.row($(this).parents('tr')).data();
+        var id = data['id'];
+        window.location = "llenar/ver_remision/remision.php?id=" + id;
+    });
+    setInterval(function() {
+        table.ajax.reload(null, false);
+    }, 10000);
+
+});
 </script>
 
 </body>
