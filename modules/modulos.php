@@ -8,7 +8,7 @@ if (is_array($array_rol_user =  $login->get_rol_tercero($_SESSION['id_usuario'])
 
 <!--- ============================MODULO USUARIOS CLIENTES============================================= -->
 <?php
-    $modulos = array(1,26); // Array de roles para habilitar roles
+    $modulos = array(2,26); // Array de roles para habilitar roles
     if ($login->validar_rol_user($modulos, $array_rol_user)) : // Validacion para habilitar el usuario
     ?>
 <!-- Modulo HTMl -->
