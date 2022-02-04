@@ -23,24 +23,17 @@
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-header">Obras</li>
+                        <li class="nav-header">SST</li>
 
                         <li class="nav-item has-treeview">
-                            <a href="index.php" class="nav-link active">
+                            <a href="gestionepp/index.php" class="nav-link">
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
-                                    Explorar
+                                    Gestion EPP
                                 </p>
                             </a>
                         </li>
-                        <li class="nav-item has-treeview">
-                            <a href="create/crear.php" class="nav-link ">
-                                <i class="nav-icon fas fa-copy"></i>
-                                <p>
-                                    Crear
-                                </p>
-                            </a>
-                        </li>
+                        
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

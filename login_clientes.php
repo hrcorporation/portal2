@@ -14,6 +14,7 @@ $php_clases = new php_clases();
 $php_estado = false;
 $php_msg = "";
 $php_codigo = "#";
+$log = "";
 
 if (!empty($_POST['usuario']) && !empty($_POST['contrasenia'])) {
     $php_usuario = htmlspecialchars($_POST['usuario']);
@@ -30,14 +31,11 @@ if (!empty($_POST['usuario']) && !empty($_POST['contrasenia'])) {
      */
     if (is_array($user_array = $login->login_auth($php_usuario, $php_password))) {
         foreach ($user_array as $key) {
-           
-
             /**
              * Valida el Estado del Usuario
              */
             if (intval($key['estado']) == 1) {
                 $php_msg = "paso 3";
-
                 /**
                  * Se crea y se definen las variables de sesion
                  */
@@ -45,46 +43,29 @@ if (!empty($_POST['usuario']) && !empty($_POST['contrasenia'])) {
                 $_SESSION['nombre_usuario'] = $key['nombre_completo'];
                 $_SESSION['session_key'] = $hoy;
 
-
                 if (is_array($array_rol = $login->get_rol_tercero($key['id']))) {
-                    $php_msg = "paso 4";
 
-                    foreach ($array_rol as $rol_user) {
-
-                       
-
-                        switch (intval($rol_user)) {
-                            case 101:
-                            case '101':
-                                break;
-                            case 102:
-                                if($cambio_pass){
-                                    $php_codigo = "portalcliente/modulos/profile/passnew.php";
-                                }else{
-                                    $php_codigo = "portalcliente/modulos/remisiones/index.php";
-                                }    
-                            break;
-                            case 103:
-                                if($cambio_pass){
-                                    $php_codigo = "portalcliente/modulos/profile/passnew.php";
-                                }else{
-                                    $php_codigo = "portalcliente/modulos/remisiones_cliente/index.php";
-                                }
-                                break;
-                            default:
-                                $php_codigo = "cerrar.php";
-                                $php_estado = false;
-                                $php_msg = "No tiene Permisos ";
-                                break;
-                        }
-
-                        if(intval($rol_user) == 101 ){
-                            $php_codigo = "portalcliente/modulos/facturacione/index.php";
-                            $php_estado = true;
-                            $php_msg = "Logeado Correctamente";
+                    if(in_array([101,102,103],$array_rol)){
+                        if($cambio_pass){
+                            $php_codigo = "portalcliente/modulos/profile/passnew.php";
                         }else{
-
-                        }
+                            $php_codigo = "portalcliente/modulos/";
+                        }  
+                        $php_msg = "paso 4";
+                        $php_estado = true;
+                    }elseif(in_array(['101','102','103'],$array_rol)){
+                        if($cambio_pass){
+                            $php_codigo = "portalcliente/modulos/profile/passnew.php";
+                        }else{
+                            $php_codigo = "portalcliente/modulos/";
+                        }  
+                        $php_msg = "paso 4";
+                        $php_estado = true;
+                    }else{
+                        $php_codigo = "cerrar.php";
+                        $php_estado = false;
+                        $reg = $array_rol;
+                        $php_msg = "No tiene Permisos ";
                     }
                 }
             } else {
@@ -104,7 +85,7 @@ $datos = array(
     'errores' => $php_msg,
     'post' => $_POST,
     'key' => $key,
-    'result' => $rol_user,
+    'log' =>$array_rol
 
 );
 
@@ -114,4 +95,3 @@ echo json_encode($datos, JSON_FORCE_OBJECT);
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-

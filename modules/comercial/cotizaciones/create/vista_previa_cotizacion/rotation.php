@@ -5,6 +5,9 @@ class PDF_Rotate extends FPDF
 {
 var $angle=0;
 
+//MultiCell with bullet
+
+
 function Rotate($angle,$x=-1,$y=-1)
 {
 	if($x==-1)

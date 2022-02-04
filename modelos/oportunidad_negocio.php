@@ -10,6 +10,87 @@ class oportunidad_negocio extends conexionPDO
         date_default_timezone_set('America/Bogota');
     }
 
+    public function select_comuna($id_municipio, $id_comuna = null)
+    {
+        $this->id_municipio = intval($id_municipio);
+        $this->id_comuna = intval($id_comuna);
+
+        $option = "<option  selected='true' value='NULL' disabled='true'> Seleccione</option>";
+        $sql = "SELECT `id`, `nombre_comuna` FROM `comunas` WHERE `id_municipio` = :id_municipio";
+        //Preparar Conexion
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindParam(':id_municipio', $id_municipio, PDO::PARAM_INT);
+
+        // Ejecutar 
+        $result = $stmt->execute();
+        while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            if ($this->id_comuna == $fila['id']) {
+                $selection = "selected='true'";
+            } else {
+                $selection = "";
+            }
+            $option .= '<option value="' . $fila['id'] . '" ' . $selection . ' >' . $fila['nombre_comuna'] . ' </option>';
+        }
+        //Cerrar Conexion
+        $this->PDO->closePDO();
+
+        //resultado
+        return $option;
+    }
+
+    public function select_municipio($id_departamento, $id_municipio = null)
+    {
+        $this->id_departamento = intval($id_departamento);
+        $this->id_municipio = intval($id_municipio);
+
+        $option = "<option  selected='true' value='NULL' disabled='true'> Seleccione</option>";
+        $sql = "SELECT `id_municipio`, `municipio`  FROM `municipios` WHERE departamento_id = :id_departamento";
+        //Preparar Conexion
+        $stmt = $this->con->prepare($sql);
+        $stmt->bindParam(':id_departamento', $id_departamento, PDO::PARAM_INT);
+
+        // Ejecutar 
+        $result = $stmt->execute();
+        while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            if ($this->id_municipio == $fila['id_municipio']) {
+                $selection = "selected='true'";
+            } else {
+                $selection = "";
+            }
+            $option .= '<option value="' . $fila['id_municipio'] . '" ' . $selection . ' >' . $fila['municipio'] . ' </option>';
+        }
+        //Cerrar Conexion
+        $this->PDO->closePDO();
+
+        //resultado
+        return $option;
+    }
+
+
+    public function select_departamento($id_departamento = null)
+    {
+        $this->id_departamento = intval($id_departamento);
+
+        $option = "<option  selected='true' value='NULL' disabled='true'> Seleccione</option>";
+        $sql = "SELECT `id_departamento`, `departamento` FROM `departamentos`";
+        //Preparar Conexion
+        $stmt = $this->con->prepare($sql);
+        // Ejecutar 
+        $result = $stmt->execute();
+        while ($fila = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            if ($this->id_departamento == $fila['id_departamento']) {
+                $selection = "selected='true'";
+            } else {
+                $selection = "";
+            }
+            $option .= '<option value="' . $fila['id_departamento'] . '" ' . $selection . ' >' . $fila['departamento'] . ' </option>';
+        }
+        //Cerrar Conexion
+        $this->PDO->closePDO();
+
+        //resultado
+        return $option;
+    }
   
     public function editar_oportunidad($id,$num_ident,$nombre_completos, $apellidos_completos, $result)
     {
@@ -218,20 +299,36 @@ class oportunidad_negocio extends conexionPDO
 
     }
 
-    public function crear_oportunidad_negocio($fecha,$nit,$nombres, $apellidos,$status)
+    public function crear_oportunidad_negocio($asesora_comercial,$fecha_contacto,$tipo_cliente ,$tipo_plan_maestro , $departamento, $municipio, $comuna , $barrio, $nit, $nombre_completo, $ap_completo, $nombre_obra, $direccion_obra, $telefono_cliente, $nombre_maestro, $celular_maestro, $m3_potenciales, $fecha_posible_fundida,$resultado, $contacto_cliente, $observacion)
     {
-        $razon_social= $nombres. " ".$apellidos;
-        $sql="INSERT INTO `ct63_oportuniodad_negocio`( `fecha`, `nidentificacion`, `razon_social`, `nombrescompletos`, `apellidoscompletos`, `status_op`) VALUES (:fecha,:nit,:razon_social, :nombres, :apellidos,:estatus)";
-      
+        $razon_social= $nombre_completo. " ".$ap_completo;
+
+    $sql ="INSERT INTO `ct63_oportuniodad_negocio`(`asesora_comercial`, `fecha_contacto`,tipo_cliente, tipo_plan_maestro, `departamento`, `municipio`, `comuna`, `barrio`, `nidentificacion`, `razon_social`, `nombrescompletos`, `apellidoscompletos`, `nombre_obra`, `direccion_obra`,telefono_cliente, `nombre_maestro`, `celular_maestro`, `m3_potenciales`, `fecha_posible_fundida`, `resultado`, `contacto_cliente`, `observacion`) VALUES (:asesora_comercial, :fecha_contacto,:tipo_cliente, :tipo_plan_maestro,:departamento, :municipio, :comuna, :barrio, :nit, :razon_social ,:nombre_completo, :ap_completo, :nombre_obra, :direccion_obra,:telefono_cliente,  :nombre_maestro ,:celular_maestro, :m3_potenciales, :fecha_posible_fundida, :resultado , :contacto_cliente, :observacion)";     
         // Preparar la conexion del sentencia SQL
         $stmt = $this->con->prepare($sql);
         // Marcadores
-        $stmt->bindParam(':fecha', $fecha, PDO::PARAM_STR);
+        $stmt->bindParam(':asesora_comercial', $asesora_comercial, PDO::PARAM_STR);
+        $stmt->bindParam(':fecha_contacto', $fecha_contacto, PDO::PARAM_STR);
+        $stmt->bindParam(':tipo_cliente', $tipo_cliente, PDO::PARAM_STR);
+        $stmt->bindParam(':tipo_plan_maestro', $tipo_plan_maestro, PDO::PARAM_STR);
+        $stmt->bindParam(':departamento', $departamento, PDO::PARAM_STR);
+        $stmt->bindParam(':municipio', $municipio, PDO::PARAM_STR);
+        $stmt->bindParam(':comuna', $comuna, PDO::PARAM_STR);
+        $stmt->bindParam(':barrio', $barrio, PDO::PARAM_STR);
         $stmt->bindParam(':nit', $nit, PDO::PARAM_INT);
         $stmt->bindParam(':razon_social', $razon_social, PDO::PARAM_STR);
-        $stmt->bindParam(':nombres', $nombres, PDO::PARAM_STR);
-        $stmt->bindParam(':apellidos', $apellidos, PDO::PARAM_STR);
-        $stmt->bindParam(':estatus', $status, PDO::PARAM_INT);
+        $stmt->bindParam(':nombre_completo', $nombre_completo, PDO::PARAM_STR);
+        $stmt->bindParam(':ap_completo', $ap_completo, PDO::PARAM_STR);
+        $stmt->bindParam(':nombre_obra', $nombre_obra, PDO::PARAM_STR);
+        $stmt->bindParam(':direccion_obra', $direccion_obra, PDO::PARAM_STR);
+        $stmt->bindParam(':telefono_cliente', $telefono_cliente, PDO::PARAM_STR);
+        $stmt->bindParam(':nombre_maestro', $nombre_maestro, PDO::PARAM_STR);
+        $stmt->bindParam(':celular_maestro', $celular_maestro, PDO::PARAM_STR);
+        $stmt->bindParam(':m3_potenciales', $m3_potenciales, PDO::PARAM_STR);
+        $stmt->bindParam(':fecha_posible_fundida', $fecha_posible_fundida, PDO::PARAM_STR);
+        $stmt->bindParam(':resultado', $resultado, PDO::PARAM_STR);
+        $stmt->bindParam(':contacto_cliente', $contacto_cliente, PDO::PARAM_STR);
+        $stmt->bindParam(':observacion', $observacion, PDO::PARAM_STR);
         //$stmt->bindParam(':var', $var, PDO::PARAM_STR);
         // Ejecuta SQL
         if ($stmt->execute()) {

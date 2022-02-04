@@ -18,10 +18,28 @@ if (isset($_POST['nit']) && !empty($_POST['nit']) &&
     isset($_POST['nombre_completo']) && !empty($_POST['nombre_completo'])
 ){
     $fecha = "" . date("Y-m-d H:i:s");
+    $asesora_comercial = $_POST['asesora_comercial'];
+    $fecha_contacto = $_POST['fecha_contacto'];
+    $departamento = $_POST['departamento'];
+    $municipio = $_POST['municipio'];
+    $comuna = $_POST['comuna'];
+    $barrio = $_POST['barrio'];
+    $tipo_cliente = $_POST['tipo_cliente'];
+    $tipo_plan_maestro = $_POST['tipo_plan_maestro'];
+    $nombre_obra = $_POST['nombre_obra'];
+    $telefono_cliente = $_POST['telefono_cliente'];
     $nit = $_POST['nit'];
-    $nombres = $_POST['nombre_completo'];
-    $apellidos = $_POST['ap_completo'];
-    $status = 3;
+    $nombre_completo = $_POST['nombre_completo'];
+    $ap_completo = $_POST['ap_completo'];
+    $nombre_maestro = $_POST['nombre_maestro'];
+    $direccion_obra = $_POST['direccion_obra'];
+    $celular_maestro = $_POST['celular_maestro'];
+    $m3_potenciales = $_POST['m3_potenciales'];
+    $fecha_posible_fundida = $_POST['fecha_posible_fundida'];
+    $resultado = $_POST['resultado'];
+    $contacto_cliente = $_POST['contacto_cliente'];
+    $observaciones = $_POST['observaciones'];
+    
 
     
     
@@ -32,7 +50,7 @@ if (isset($_POST['nit']) && !empty($_POST['nit']) &&
      * 10- Rechazhado 
      */
     
-    if($id_lastinsert = $op->crear_oportunidad_negocio($fecha,$nit,$nombres, $apellidos,$status)){
+    if($id_lastinsert = $op->crear_oportunidad_negocio($asesora_comercial,$fecha_contacto, $tipo_cliente ,$tipo_plan_maestro ,$departamento, $municipio, $comuna , $barrio, $nit, $nombre_completo, $ap_completo, $nombre_obra, $direccion_obra, $telefono_cliente, $nombre_maestro, $celular_maestro, $m3_potenciales, $fecha_posible_fundida,$resultado, $contacto_cliente, $observaciones)){
         $boton  = "<a href='../editar/editar.php?id=".$id_lastinsert."' class='btn btn-block btn-warning'> Agregar Visitas</a>";
         $php_estado = true;
     }else{
